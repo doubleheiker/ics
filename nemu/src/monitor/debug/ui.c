@@ -38,15 +38,18 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
+static int cmd_si(char *args);
+
 static struct {
   char *name;
   char *description;
+  /*function point*/
   int (*handler) (char *);
 } cmd_table [] = {
   { "help", "Display informations about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-  //{ "si", "Execute N steps", cmd_si},
+  { "si", "Execute N steps", cmd_si},
 
   /* TODO: Add more commands */
 
@@ -75,6 +78,16 @@ static int cmd_help(char *args) {
     printf("Unknown command '%s'\n", arg);
   }
   return 0;
+}
+
+static int cmd_si(char *args) {
+	char *arg = strtok(NULL, " ");
+	int n;
+	sscanf(arg, "%d", &n);
+	for (int j = 0; j < n; ++j) {
+		cpu_exec(1);
+	}
+	return 1;
 }
 
 void ui_mainloop(int is_batch_mode) {
