@@ -87,8 +87,8 @@ static int cmd_si(char *args) {
 		cpu_exec(1);
 		return 1;
 	}
-	int n;
-	sscanf(arg, "%d", &n);
+	uint64_t n;
+	sscanf(arg, "%llu", &n);
 	for (int j = 0; j < n; ++j) {
 		cpu_exec(1);
 	}
