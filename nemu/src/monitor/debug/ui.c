@@ -49,7 +49,7 @@ static struct {
   { "help", "Display informations about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-  { "si", "Execute N steps", cmd_si},
+  { "si", "Execute N steps, 'si' without [N] will execute 'si 1' as defualt", cmd_si},
 
   /* TODO: Add more commands */
 
@@ -90,9 +90,6 @@ static int cmd_si(char *args) {
 	uint64_t n;
 	sscanf(arg, "%llu", &n);
 	cpu_exec(n);
-	/*for (int j = 0; j < n; ++j) {
-		cpu_exec(1);
-	}*/
 	return 1;
 }
 
