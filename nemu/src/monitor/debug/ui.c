@@ -40,6 +40,8 @@ static int cmd_help(char *args);
 
 static int cmd_si(char *args);
 
+//static int cmd_info(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -85,12 +87,12 @@ static int cmd_si(char *args) {
 	/*Only input 'si'*/
 	if (arg == NULL) {
 		cpu_exec(1);
-		return 1;
+		return 0;
 	}
 	uint64_t n;
 	sscanf(arg, "%llu", &n);
 	cpu_exec(n);
-	return 1;
+	return 0;
 }
 
 void ui_mainloop(int is_batch_mode) {
