@@ -42,6 +42,8 @@ static int cmd_si(char *args);
 
 static int cmd_info(char *args);
 
+static int cmd_x(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -52,7 +54,8 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   { "si", "Execute N steps, 'si' without [N] will execute 'si 1' as defualt", cmd_si },
-  { "info", "Print the register states", cmd_info },
+  { "info", "Print the registers' states, 'info r': print all registers' states", cmd_info },
+  { "x", "Scan the memory, usage: x [N] [addr]", cmd_x },
 
   /* TODO: Add more commands */
 
@@ -128,6 +131,34 @@ static int cmd_info(char *args) {
 
 	else {
 		printf("nemu: command not found: info %s\n", arg);
+	}
+	return 0;
+}
+
+static int cmd_x(char *args) {
+	char *arg = strtok(NULL, " ");
+	/*Only input x*/
+	if (arg == NULL) {
+		printf("Please use 'help x' to see the usage of 'x'\n");
+		return 0;
+	}
+	
+	/*ui*/
+	printf("Address\tDword block...Byte sequence");
+
+	/*n: The number of memory info */
+	uint32_t n;
+	sscanf(arg, "%u", &n);
+
+	char *arg1 = strtok(NULL, " ");
+	vaddr_t vaddress;
+	sscanf(arg1, "%x", &vaddress);
+	
+	/*Print address*/
+	for(int i = 0; i < n; i++) {
+		printf("%x", vaddr_read(vaddress, 4));
+		vaddress += 4;
+		printf("\n");
 	}
 	return 0;
 }
