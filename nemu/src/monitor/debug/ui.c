@@ -156,8 +156,8 @@ static int cmd_x(char *args) {
 	
 	/*Print address*/
 	for(int i = 0; i < n; i++) {
-		printf("%x", vaddress);
-		printf("%x", vaddr_read(vaddress, 4));
+		printf("0x%x", vaddress);
+		printf("\t0x%x", vaddr_read(vaddress, 4));
 		vaddress += 4;
 		printf("\n");
 	}
