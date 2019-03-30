@@ -40,7 +40,7 @@ static int cmd_help(char *args);
 
 static int cmd_si(char *args);
 
-//static int cmd_info(char *args);
+static int cmd_info(char *args);
 
 static struct {
   char *name;
@@ -51,7 +51,8 @@ static struct {
   { "help", "Display informations about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-  { "si", "Execute N steps, 'si' without [N] will execute 'si 1' as defualt", cmd_si},
+  { "si", "Execute N steps, 'si' without [N] will execute 'si 1' as defualt", cmd_si },
+  { "info", "Print the register states", cmd_info },
 
   /* TODO: Add more commands */
 
@@ -94,6 +95,27 @@ static int cmd_si(char *args) {
 	cpu_exec(n);
 	return 0;
 }
+
+static int cmd_info(char *args) {
+	char *arg = strtok(NULL, " ");
+	/*command 'r'*/
+	if (strcmp(arg, "r") == 0) {
+		for (int i = 0; i < 8; ++i) {
+			printf("%s:\t%8x\t", regsl[0], cpu.gpr[0]._32);
+		}
+	}
+
+	/*command 'w'*/
+	else if (strcmp(arg, "w") == 0){
+		/*In PA1.3*/
+	}
+
+	else {
+		printf("nemu: command not found: %s", arg);
+	}
+	return 0;
+}
+
 
 void ui_mainloop(int is_batch_mode) {
   if (is_batch_mode) {
