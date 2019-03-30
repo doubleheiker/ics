@@ -115,10 +115,9 @@ static int cmd_info(char *args) {
 			printf("%s:\t%8x\n", regsw[i], cpu.gpr[i]._16);
 		}
 		/*print 8 bit register*/
-		for (int i = 0; i < 8; ++i) {
-			for (int j = 0; j < 2; ++j) {
-				printf("%s:\t%8x\n", regsb[i], cpu.gpr[i]._8[j]);
-			}
+		for (int i = 0; i < 4; ++i) {
+			printf("%s:\t%8x\n", regsb[i], cpu.gpr[i]._8[0]);
+			printf("%s:\t%8x\n", regsb[i+4], cpu.gpr[i]._8[1]); 
 		}
 	}
 
