@@ -166,7 +166,7 @@ static int cmd_x(char *args) {
 		sprintf(str, "%08x", vaddr_read(vaddress, 4));
 		printf(" ...");
 		for (int i = 7; i >= 0; i = i - 2) {
-			printf("%c%c ", str[i], str[i-1]);
+			printf("%c%c ", str[i-1], str[i]);
 		}
 		vaddress += 4;
 		printf("\n");
