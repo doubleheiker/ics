@@ -101,6 +101,7 @@ static int cmd_info(char *args) {
 	/*Only input 'info'*/
 	if (arg == NULL) {
 		printf("Please use 'help' to see the usage of 'info'\n");
+		return 0;
 	}
 
 	/*command 'r'*/
