@@ -144,7 +144,7 @@ static int cmd_x(char *args) {
 	}
 	
 	/*ui*/
-	printf("Address\tDword block...Byte sequence\n");
+	printf("Address\t\tDword block...Byte sequence\n");
 
 	/*n: The number of memory info */
 	uint32_t n;
@@ -157,7 +157,7 @@ static int cmd_x(char *args) {
 	/*Print address*/
 	for(int i = 0; i < n; i++) {
 		printf("0x%x", vaddress);
-		printf("\t0x%x", vaddr_read(vaddress, 4));
+		printf(" 0x%x", vaddr_read(vaddress, 4));
 		vaddress += 4;
 		printf("\n");
 	}
