@@ -168,6 +168,10 @@ static int cmd_x(char *args) {
 		for (int i = 7; i >= 0; i = i - 2) {
 			printf("%c%c ", str[i-1], str[i]);
 		}
+
+		/*test*/
+		printf(" 0x%x", vaddr_read(vaddress, 1));
+
 		vaddress += 4;
 		printf("\n");
 	}
