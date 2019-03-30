@@ -98,10 +98,15 @@ static int cmd_si(char *args) {
 
 static int cmd_info(char *args) {
 	char *arg = strtok(NULL, " ");
+	/*Only input 'info'*/
+	if (arg == NULL) {
+		printf("Please use 'help' to see the usage of 'info'\n");
+	}
+
 	/*command 'r'*/
 	if (strcmp(arg, "r") == 0) {
 		for (int i = 0; i < 8; ++i) {
-			printf("%s:\t%8x\t", regsl[0], cpu.gpr[0]._32);
+			printf("%s:\t%8x\n", regsl[0], cpu.gpr[0]._32);
 		}
 	}
 
@@ -111,7 +116,7 @@ static int cmd_info(char *args) {
 	}
 
 	else {
-		printf("nemu: command not found: %s", arg);
+		printf("nemu: command not found: info %s\n", arg);
 	}
 	return 0;
 }
