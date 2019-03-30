@@ -156,8 +156,18 @@ static int cmd_x(char *args) {
 	
 	/*Print address*/
 	for(int i = 0; i < n; i++) {
+		/*Print virtual address*/
 		printf("0x%08x", vaddress);
+		/*Print value in address*/
 		printf("\t0x%08x", vaddr_read(vaddress, 4));
+		/*Print value by normal sequence*/
+		char str[8];
+		//memset(str, 0, 8*sizeof(char));
+		sprintf(str, "%08x", vaddr_read(vaddress, 4));
+		printf(" ...");
+		for (int i = 7; i >= 0; i = i - 2) {
+			printf("%c%c ", str[i], str[i-1]);
+		}
 		vaddress += 4;
 		printf("\n");
 	}
