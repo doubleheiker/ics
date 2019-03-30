@@ -100,14 +100,25 @@ static int cmd_info(char *args) {
 	char *arg = strtok(NULL, " ");
 	/*Only input 'info'*/
 	if (arg == NULL) {
-		printf("Please use 'help' to see the usage of 'info'\n");
+		printf("Please use 'help info' to see the usage of 'info'\n");
 		return 0;
 	}
 
 	/*command 'r'*/
 	if (strcmp(arg, "r") == 0) {
+		/*print 32 bit register*/
 		for (int i = 0; i < 8; ++i) {
-			printf("%s:\t%8x\n", regsl[0], cpu.gpr[0]._32);
+			printf("%s:\t%8x\n", regsl[i], cpu.gpr[i]._32);
+		}
+		/*print 16 bit register*/
+		for (int i = 0; i < 8; ++i) {
+			printf("%s:\t%8x\n", regsw[i], cpu.gpr[i]._16);
+		}
+		/*print 8 bit register*/
+		for (int i = 0; i < 8; ++i) {
+			for (int j = 0; j < 2; ++j) {
+				printf("%s:\t%8x\n", regsb[i], cpu.gpr[i]._8[j]);
+			}
 		}
 	}
 
