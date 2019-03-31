@@ -170,8 +170,8 @@ static int cmd_x(char *args) {
 			printf("%c%c ", str[i-1], str[i]);
 		}*/
 		
-		printf("%x %x ", vaddr_read(vaddress, 1), vaddr_read(vaddress+1, 1));
-		printf("%x %x ", vaddr_read(vaddress+2, 1), vaddr_read(vaddress+3, 1));
+		printf("%02x %02x ", vaddr_read(vaddress, 1), vaddr_read(vaddress+1, 1));
+		printf("%02x %02x ", vaddr_read(vaddress+2, 1), vaddr_read(vaddress+3, 1));
 
 		/*test*/
 		//printf(" 0x%x", vaddr_read(vaddress, 1));
