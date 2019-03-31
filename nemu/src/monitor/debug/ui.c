@@ -111,16 +111,16 @@ static int cmd_info(char *args) {
 	if (strcmp(arg, "r") == 0) {
 		/*print 32 bit register*/
 		for (int i = 0; i < 8; ++i) {
-			printf("%s:\t%8x\n", regsl[i], cpu.gpr[i]._32);
+			printf("%s:\t%8x\t%d\n", regsl[i], cpu.gpr[i]._32, cpu.gpr[i]._32);
 		}
 		/*print 16 bit register*/
 		for (int i = 0; i < 8; ++i) {
-			printf("%s:\t%8x\n", regsw[i], cpu.gpr[i]._16);
+			printf("%s:\t%8x\t%d\n", regsw[i], cpu.gpr[i]._16, cpu.gpr[i]._32);
 		}
 		/*print 8 bit register*/
 		for (int i = 0; i < 4; ++i) {
-			printf("%s:\t%8x\n", regsb[i], cpu.gpr[i]._8[0]);
-			printf("%s:\t%8x\n", regsb[i+4], cpu.gpr[i]._8[1]); 
+			printf("%s:\t%8x\t%d\n", regsb[i], cpu.gpr[i]._8[0], cpu.gpr[i]._8[0]);
+			printf("%s:\t%8x\t%d\n", regsb[i+4], cpu.gpr[i]._8[1], cpu.gpr[i]._8[1]); 
 		}
 	}
 
