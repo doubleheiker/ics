@@ -161,13 +161,17 @@ static int cmd_x(char *args) {
 		/*Print value in address*/
 		printf("\t0x%08x", vaddr_read(vaddress, 4));
 		/*Print value by normal sequence*/
-		char str[8];
+
+		//char str[8];
 		//memset(str, 0, 8*sizeof(char));
-		sprintf(str, "%08x", vaddr_read(vaddress, 4));
+		//sprintf(str, "%08x", vaddr_read(vaddress, 4));
 		printf(" ...");
-		for (int i = 7; i >= 0; i = i - 2) {
+		/*for (int i = 7; i >= 0; i = i - 2) {
 			printf("%c%c ", str[i-1], str[i]);
-		}
+		}*/
+		
+		printf("%x %x ", vaddr_read(vaddress, 1), vaddr_read(vaddress+1, 1));
+		printf("%x %x ", vaddr_read(vaddress+2, 1), vaddr_read(vaddress+3, 1));
 
 		/*test*/
 		//printf(" 0x%x", vaddr_read(vaddress, 1));
