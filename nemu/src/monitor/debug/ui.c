@@ -44,6 +44,8 @@ static int cmd_info(char *args);
 
 static int cmd_x(char *args);
 
+static int cmd_p(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -56,6 +58,7 @@ static struct {
   { "si", "Execute N steps, 'si' without [N] will execute 'si 1' as defualt", cmd_si },
   { "info", "Print the registers' states, 'info r': print all registers' states", cmd_info },
   { "x", "Scan the memory, usage: x [N] [addr]", cmd_x },
+  { "p", "evaluate expression by regex", cmd_p},
 
   /* TODO: Add more commands */
 
@@ -181,6 +184,11 @@ static int cmd_x(char *args) {
 	return 0;
 }
 
+static int cmd_p(char *args) {
+	bool *success = false;
+	expr(args, success);
+	return 0;
+}
 
 void ui_mainloop(int is_batch_mode) {
   if (is_batch_mode) {
