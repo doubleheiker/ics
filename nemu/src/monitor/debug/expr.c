@@ -90,17 +90,48 @@ static bool make_token(char *e) {
 		//scanf("nothing wrong here");
 
         switch (rules[i].token_type) {
+			case TK_NOTYPE:
+				break;
+			case '+':
+				tokens[nr_token].type = '+';
+				nr_token++;
+				break;
+			case '-':
+				tokens[nr_token].type = '-';
+				nr_token++;
+				break;
+			case '*':
+				tokens[nr_token].type = '*';
+				nr_token++;
+				break;
+			case '/':
+				tokens[nr_token].type = '/';
+				nr_token++;
+				break;
+			case TK_EQ:
+				tokens[nr_token].type = TK_EQ;
+				nr_token++;
+				break;
 			case TK_HEX:
 				tokens[nr_token].type = TK_HEX;
 				strncpy(tokens[nr_token].str, substr_start, substr_len);
-				scanf("%s", tokens[nr_token].str);
+				//scanf("%s", tokens[nr_token].str);
 				nr_token++;
 				break;
 			case TK_DEC:
 				tokens[nr_token].type = TK_DEC;
 				strncpy(tokens[nr_token].str, substr_start, substr_len);
 				nr_token++;
-          default: TODO();
+				break;
+			case TK_LBRACKET:
+				tokens[nr_token].type = TK_LBRACKET;
+				nr_token++;
+				break;
+			case TK_RBRACKET:
+				tokens[nr_token].type = TK_RBRACKET;
+				nr_token++;
+				break;
+         // default: TODO();
         }
 
         break;
@@ -123,8 +154,8 @@ uint32_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  // TODO();
-  scanf("nothing ");
+  //TODO();
+  //scanf("nothing ");
 
   return 0;
 }
