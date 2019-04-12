@@ -146,6 +146,25 @@ static bool make_token(char *e) {
   return true;
 }
 
+//bool check_parentheses() {
+//}
+
+
+//uint32_t eval(int p, int q) {
+//	if (p > q) {
+//		/*bad expr*/
+//	}
+//	else if (p == q) {
+//		/*single token, should be a number*/
+//	}
+//	else if (check_parentheses(p, q) == true) {
+//		/*the expr is surrounded by a matched pair of parentheses*/
+//		return eval(p+1, q-1);
+//	}
+//	else {
+//	}
+//}
+
 uint32_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
