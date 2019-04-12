@@ -27,7 +27,7 @@ static struct rule {
   {"\\+", '+'},                   // plus
   {"==", TK_EQ},                  // equal
   {"[0-9]{1,9}", TK_DEC},         // dec
-  {"[0-9a-fA-F]{1,8}", TK_HEX},   // hex
+  {"0x[0-9a-fA-F]{1,8}", TK_HEX},   // hex
   {"\\$[eE]?[a-dA-D][xX]|\\$[eE]?[iI][pP]|\\$[a-dA-D][hHlL]|\\$[eE]?[dDsS][Ii]|\\$[eE]?[sSbB][pP]", TK_REG}, //reg
   {"\\(", TK_LBRACKET},           // left bracket
   {"\\)", TK_RBRACKET},           // right bracket
