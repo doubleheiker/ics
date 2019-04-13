@@ -153,7 +153,7 @@ static bool make_token(char *e) {
 }
 
 bool check_parentheses(int p, int q) {
-	printf("enter the check\n");
+	//printf("enter the check\n");
 	if (tokens[p].type == TK_LBRACKET && tokens[q].type == TK_RBRACKET) {
 		int i, lbras = 0;//lbras means the numbers of single left brackets
 		i = p + 1;
@@ -175,7 +175,7 @@ bool check_parentheses(int p, int q) {
 }
 
 int find_dominated_op(int p, int q) {
-	printf("enter the dominated\n");
+	//printf("enter the dominated\n");
 	int lbras = 0, op = -1;//op means the location of dominated op
 	/*find the dominated op*/
 	for (int i = p; i <= q; i++) {
@@ -249,7 +249,7 @@ uint32_t eval(int p, int q) {
 		op = find_dominated_op(p, q);
 		/*Wrong expression*/
 		if (op == -2) {
-			printf("Bad expression!\n");
+			printf("Bad expression2!\n");
 			assert(0);
 	 	}
 		/*No dominated op*/
