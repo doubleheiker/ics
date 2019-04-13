@@ -245,6 +245,7 @@ uint32_t eval(int p, int q) {
 			//int ret;
 			//ret = strncmp(tokens[p].str, "$eax", 4);
 			printf("%s", tokens[p].str);
+			strcmp(tokens[p].str, "$eax");
 			if (1) {
 				res = cpu.eax;
 				return res;
