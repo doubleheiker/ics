@@ -171,6 +171,7 @@ bool check_parentheses(int p, int q) {
 }
 
 int find_dominated_op(int p, int q) {
+	printf("enter the dominated");
 	int lbras = 0, op = -1;//op means the location of dominated op
 	/*find the dominated op*/
 	for (int i = p; i <= q; i++) {
@@ -255,7 +256,7 @@ uint32_t eval(int p, int q) {
 		val2 = eval(op + 1, q);
 		switch (tokens[op].type) {
 			case '+':
-				printf("%d", val1+val2);
+				printf("%d", val1+val2);//
 				return val1 + val2;
 			case '-':
 				return val1 - val2;
@@ -276,7 +277,7 @@ uint32_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   }
-  printf("entered expr");
+  printf("entered expr");//
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
   *success = true;
