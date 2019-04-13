@@ -221,7 +221,7 @@ uint32_t eval(int p, int q) {
 	uint32_t res, val1, val2;
 	if (p > q) {
 		/*bad expr*/
-		printf("Bad expression!\n");
+		printf("Bad expression(1)!\n");
 		assert(0);
 	}
 	else if (p == q) {
@@ -235,7 +235,7 @@ uint32_t eval(int p, int q) {
 			return res;
 		}
 		else {
-			printf("Bad expression!\n");
+			printf("Bad expression(2)!\n");
 			assert(0);
 		}
 	}
@@ -249,19 +249,18 @@ uint32_t eval(int p, int q) {
 		op = find_dominated_op(p, q);
 		/*Wrong expression*/
 		if (op == -2) {
-			printf("Bad expression2!\n");
+			printf("Bad expression(3)!\n");
 			assert(0);
 	 	}
 		/*No dominated op*/
 	 	else if (op == -1) {
-			printf("Bad expression!\n");
+			printf("Bad expression(4)!\n");
 			assert(0);
 		}
 		val1 = eval(p, op - 1);
 		val2 = eval(op + 1, q);
 		switch (tokens[op].type) {
 			case '+':
-				printf("%d", val1+val2);//
 				return val1 + val2;
 			case '-':
 				return val1 - val2;
@@ -286,6 +285,5 @@ uint32_t expr(char *e, bool *success) {
   }
   /* TODO: Insert codes to evaluate the expression. */
   *success = true;
-  printf("%d\n", nr_token);
   return eval(0, nr_token - 1);
 }
