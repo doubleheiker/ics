@@ -240,13 +240,15 @@ uint32_t eval(int p, int q) {
 			sscanf(tokens[p].str, "%x", &res);
 			return res;
 		}
-		/*
+		
 		else if (tokens[p].type == TK_REG) {
-			if (strcmp(tokens[p].str, "eax") == 0) {
+			return res = 1;
+			/*
+			if (strcmp(tokens[p].str, "eax") == 0){
 				res = cpu.eax;
 				return res;
-			}
-		}*/
+			}*/
+		}
 		else {
 			printf("Bad expression(2)!\n");
 			assert(0);
