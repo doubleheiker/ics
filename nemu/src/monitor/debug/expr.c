@@ -213,6 +213,7 @@ int find_dominated_op(int p, int q) {
 }
 
 uint32_t eval(int p, int q) {
+	printf("enter eval");
 	uint32_t res, val1, val2;
 	if (p > q) {
 		/*bad expr*/
