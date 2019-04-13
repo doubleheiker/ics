@@ -276,7 +276,7 @@ uint32_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   }
-
+  printf("entered expr");
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
   *success = true;
