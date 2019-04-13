@@ -174,9 +174,25 @@ bool check_parentheses(int p, int q) {
 	else return false;
 }
 
+int get_level(int type) {
+	switch (type) {
+		case '*':
+		case '/':
+			return 3;
+		case '+':
+		case '-':
+			return 4;
+		case TK_EQ:
+			return 5;
+		default:
+			break;
+	}
+	return -10;//means not operator
+}
+
 int find_dominated_op(int p, int q) {
 	//printf("enter the dominated\n");
-	int lbras = 0, op = -1;//op means the location of dominated op
+	int lbras = 0, op = -1, op_type = -10;//op means the location of dominated op
 	/*find the dominated op*/
 	for (int i = p; i <= q; i++) {
 		if (tokens[i].type == TK_LBRACKET) {
@@ -186,24 +202,9 @@ int find_dominated_op(int p, int q) {
 			lbras--;
 		}
 		if (lbras == 0) {
-			switch(tokens[i].type) {
-				case '+':
-					op = i;
-					break;
-				case '-':
-					op = i;
-					break;
-				case '*':
-					op = i;
-					break;
-				case '/':
-					op = i;
-					break;
-				case TK_EQ:
-					op = i;
-					break;
-				default:
-					break;
+			if (get_level(tokens[i].type) >= op_type) {
+				op = i;
+				op_type = tokens[i].type;
 			}
 		}
 		/*if ')' number > '(', the expr is wrong*/
