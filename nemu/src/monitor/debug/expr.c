@@ -99,7 +99,7 @@ static bool make_token(char *e) {
 			case '+':
 				tokens[nr_token].type = '+';
 				nr_token++;
-				printf("%d", tokens[nr_token-1].type);
+				//printf("%d", tokens[nr_token-1].type);
 				break;
 			case '-':
 				tokens[nr_token].type = '-';
@@ -125,6 +125,7 @@ static bool make_token(char *e) {
 			case TK_DEC:
 				tokens[nr_token].type = TK_DEC;
 				strncpy(tokens[nr_token].str, substr_start, substr_len);
+				printf("%s\n", tokens[nr_token].str);
 				nr_token++;
 				break;
 			case TK_LBRACKET:
