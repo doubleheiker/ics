@@ -188,8 +188,9 @@ static int cmd_p(char *args) {
 	char *arg = strtok(NULL, " ");
 	bool *success = false;
 	uint32_t res;
-	printf("enter p and arg is: %s", arg);
+	printf("enter p and arg is: %s\n", arg);
 	res = expr(arg, success);
+	printf("%d\n", res);
 	if (*success == true) {
 		printf("%d\n", res);
 	}
