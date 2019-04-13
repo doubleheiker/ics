@@ -33,7 +33,11 @@ static struct rule {
   {"\\)", TK_RBRACKET},           // right bracket
   {"-", '-'},                     // sub
   {"\\*", '*'},                   // mul
-  {"/", '/'}                      // div
+  {"/", '/'},                     // div
+  /*{"!=", TK_NOEQ},*/                // not equal
+  /*{"&&", TK_AND},*/                 // and
+  /*{"\\|\\|", TK_OR},*/              // or
+  /*{"!", TK_NO},*/                   // no
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -87,7 +91,6 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
-		//scanf("nothing wrong here");
 
         switch (rules[i].token_type) {
 			case TK_NOTYPE:
@@ -146,24 +149,126 @@ static bool make_token(char *e) {
   return true;
 }
 
-//bool check_parentheses() {
-//}
+bool check_parentheses(int p, int q) {
+	if (tokens[p].type == TK_LBRACKET && tokens[q].type == TK_RBRACKET) {
+		int i, lbras = 0;//lbras means the numbers of single left brackets
+		i = p + 1;
+		/*check the whole expression*/
+		while (lbras >= 0 && i < q) {
+			if (tokens[i].type == TK_LBRACKET) {
+				lbras++;
+			}
+			else if (tokens[i].type == TK_RBRACKET) {
+				lbras--;
+			}
+			i++;
+		}
+		if (lbras < 0) return false;
+		else if (i == q && lbras != 0) return false;
+		else return true;
+	}
+	else return false;
+}
 
+int find_dominated_op(int p, int q) {
+	int lbras = 0, op = -1;//op means the location of dominated op
+	/*find the dominated op*/
+	for (int i = p; i <= q; i++) {
+		if (tokens[i].type == TK_LBRACKET) {
+			lbras++;
+		}
+		else if (tokens[i].type == TK_RBRACKET) {
+			lbras--;
+		}
+		if (lbras == 0) {
+			switch(tokens[i].type) {
+				case '+':
+					op = i;
+					break;
+				case '-':
+					op = i;
+					break;
+				case '*':
+					op = i;
+					break;
+				case '/':
+					op = i;
+					break;
+				case TK_EQ:
+					op = i;
+					break;
+				default:
+					break;
+			}
+		}
+		/*if ')' number > '(', the expr is wrong*/
+		else if (lbras < 0) {
+			return -2;
+		}
+	}
+	/*if lbras > 0, the expr is wrong*/
+	if (lbras > 0) return -2;
+	return op;
+}
 
-//uint32_t eval(int p, int q) {
-//	if (p > q) {
-//		/*bad expr*/
-//	}
-//	else if (p == q) {
-//		/*single token, should be a number*/
-//	}
-//	else if (check_parentheses(p, q) == true) {
-//		/*the expr is surrounded by a matched pair of parentheses*/
-//		return eval(p+1, q-1);
-//	}
-//	else {
-//	}
-//}
+uint32_t eval(int p, int q) {
+	uint32_t res, val1, val2;
+	if (p > q) {
+		/*bad expr*/
+		printf("Bad expression!\n");
+		assert(0);
+	}
+	else if (p == q) {
+		/*single token, should be a number*/
+		if (tokens[p].type == TK_DEC) {
+			sscanf(tokens[p].str, "%d", &res);
+			return res;
+		}
+		else if (tokens[p].type == TK_HEX) {
+			sscanf(tokens[p].str, "%x", &res);
+			return res;
+		}
+		else {
+			printf("Bad expression!\n");
+			assert(0);
+		}
+	}
+	else if (check_parentheses(p, q) == true) {
+		/*the expr is surrounded by a matched pair of parentheses*/
+		/*just throw away the parentheses*/
+		return eval(p+1, q-1);
+	}
+	else {
+		int op;
+		op = find_dominated_op(p, q);
+		/*Wrong expression*/
+		if (op == -2) {
+			printf("Bad expression!\n");
+			assert(0);
+		}
+		/*No dominated op*/
+		else if (op == -1) {
+			printf("Bad expression!\n");
+			assert(0);
+		}
+		val1 = eval(p, op - 1);
+		val2 = eval(op + 1, q);
+		switch (tokens[op].type) {
+			case '+':
+				return val1 + val2;
+			case '-':
+				return val1 - val2;
+			case '*':
+				return val1 * val2;
+			case '/':
+				return val1 / val2;
+			case TK_EQ:
+				return (val1 == val2);
+			default:
+				assert(0);
+		}
+	}
+}
 
 uint32_t expr(char *e, bool *success) {
   if (!make_token(e)) {
@@ -173,7 +278,6 @@ uint32_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
-  //scanf("nothing ");
 
-  return 0;
+  return eval(0, nr_token - 1);
 }
