@@ -279,6 +279,8 @@ uint32_t eval(int p, int q) {
 
 uint32_t expr(char *e, bool *success) {
   //printf("entered expr\n");
+  int a = make_token(e);
+  printf("%d\n", a);
   if (!make_token(e)) {
 	printf("if true\n");
     *success = false;
