@@ -136,8 +136,13 @@ static bool make_token(char *e) {
 				tokens[nr_token].type = TK_RBRACKET;
 				nr_token++;
 				break;
+			case TK_REG:
+				tokens[nr_token].type = TK_REG;
+				strncpy(tokens[nr_token].str, substr_start, substr_len);
+				nr_token++;
+				break;
          // default: TODO();
-        }
+		}
 
         break;
       }
@@ -235,6 +240,13 @@ uint32_t eval(int p, int q) {
 			sscanf(tokens[p].str, "%x", &res);
 			return res;
 		}
+		/*
+		else if (tokens[p].type == TK_REG) {
+			if (strcmp(tokens[p].str, "eax") == 0) {
+				res = cpu.eax;
+				return res;
+			}
+		}*/
 		else {
 			printf("Bad expression(2)!\n");
 			assert(0);
