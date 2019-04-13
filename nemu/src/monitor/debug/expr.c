@@ -290,5 +290,6 @@ uint32_t expr(char *e, bool *success) {
   printf("%d\n", nr_token);
   *success = true;
   printf("%d\n", nr_token);
-  return eval(0, nr_token - 1);
+  //return eval(0, nr_token - 1);
+  return 0;
 }
