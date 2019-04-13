@@ -284,7 +284,7 @@ uint32_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   }
-  printf("entered expr and if fail\n");
+  printf("nr_token = %d entered expr and if fail\n", nr_token);
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
   *success = true;
