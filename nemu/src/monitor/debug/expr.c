@@ -242,12 +242,10 @@ uint32_t eval(int p, int q) {
 		}
 		
 		else if (tokens[p].type == TK_REG) {
-			return res = 1;
-			/*
-			if (strcmp(tokens[p].str, "eax") == 0){
+			if (1) {
 				res = cpu.eax;
 				return res;
-			}*/
+			}
 		}
 		else {
 			printf("Bad expression(2)!\n");
