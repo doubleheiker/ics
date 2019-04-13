@@ -125,7 +125,7 @@ static bool make_token(char *e) {
 			case TK_DEC:
 				tokens[nr_token].type = TK_DEC;
 				strncpy(tokens[nr_token].str, substr_start, substr_len);
-				printf("%s\n", tokens[nr_token].str);
+				//printf("%s\n", tokens[nr_token].str);
 				nr_token++;
 				break;
 			case TK_LBRACKET:
@@ -153,6 +153,7 @@ static bool make_token(char *e) {
 }
 
 bool check_parentheses(int p, int q) {
+	printf("enter the check\n");
 	if (tokens[p].type == TK_LBRACKET && tokens[q].type == TK_RBRACKET) {
 		int i, lbras = 0;//lbras means the numbers of single left brackets
 		i = p + 1;
