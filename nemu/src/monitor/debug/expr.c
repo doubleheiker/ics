@@ -247,6 +247,7 @@ uint32_t eval(int p, int q) {
 	else {
 		int op;
 		op = find_dominated_op(p, q);
+		printf("op: %d\n", op);//
 		/*Wrong expression*/
 		if (op == -2) {
 			printf("Bad expression(3)!\n");
@@ -284,7 +285,7 @@ uint32_t expr(char *e, bool *success) {
     return 0;
   }
   /* TODO: Insert codes to evaluate the expression. */
-  printf("nr_token: %d\n", nr_token);
+  //printf("nr_token: %d\n", nr_token);
   *success = true;
   return eval(0, nr_token - 1);
 }
