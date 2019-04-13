@@ -222,6 +222,16 @@ int find_dominated_op(int p, int q) {
 	return op;
 }
 
+/*
+int reg_val(char *str) {
+	uint32_t res;
+	if (strcmp(str, "$eax")==0) {
+		res = cpu.eax;
+		return res;
+	}
+	return 0;
+}*/
+
 uint32_t eval(int p, int q) {
 	//printf("enter eval\n");
 	uint32_t res, val1, val2;
@@ -242,14 +252,8 @@ uint32_t eval(int p, int q) {
 		}
 		
 		else if (tokens[p].type == TK_REG) {
-			//int ret;
-			//ret = strncmp(tokens[p].str, "$eax", 4);
-			printf("%s", tokens[p].str);
-			strcmp(tokens[p].str, "$eax");
-			if (1) {
-				res = cpu.eax;
-				return res;
-			}
+			//res = reg_val(tokens[p].str);
+			return 0;
 		}
 		else {
 			printf("Bad expression(2)!\n");
@@ -304,9 +308,11 @@ uint32_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
   //printf("nr_token: %d\n", nr_token);
   char str[]="$eax";
+  if (1){
+  if (1){
   if (strcmp(str,"$eax")==0) {
 	  printf("true!");
-  }
+  }}}
   *success = true;
   return eval(0, nr_token - 1);
 }
