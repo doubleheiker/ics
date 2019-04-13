@@ -279,14 +279,12 @@ uint32_t eval(int p, int q) {
 
 uint32_t expr(char *e, bool *success) {
   //printf("entered expr\n");
-  int a = make_token(e);
-  printf("%d\n", a);
   if (!make_token(e)) {
 	printf("if true\n");
     *success = false;
     return 0;
   }
-  printf("entered expr and if fail");//
+  printf("entered expr and if fail\n");//
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
   *success = true;
