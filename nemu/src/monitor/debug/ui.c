@@ -190,13 +190,13 @@ static int cmd_p(char *args) {
 	bool *success;
 	success = &a;
 	uint32_t res;
-	printf("enter p and arg is and success is: %s, %d\n", arg, *success);
+	//printf("enter p and arg is and success is: %s, %d\n", arg, *success);
 	res = expr(arg, success);
-	printf("res: %d\n", res);
-	//if (*success == true) {
-		//printf("%d\n", res);
-	//}
-	//else printf("Fail!");
+	//printf("res: %d\n", res);
+	if (*success == true) {
+		printf("%d\n", res);
+	}
+	else printf("Fail!");
 	return 0;
 }
 

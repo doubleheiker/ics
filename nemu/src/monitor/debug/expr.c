@@ -7,8 +7,8 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ = 255, TK_DEC = 254, TK_HEX = 253,
-  TK_REG = 252, TK_LBRACKET = 251, TK_RBRACKET = 250
+  TK_NOTYPE = 256, TK_EQ = 257, TK_DEC = 258, TK_HEX = 259,
+  TK_REG = 260, TK_LBRACKET = 261, TK_RBRACKET = 262
 
   /* TODO: Add more token types */
 
@@ -251,9 +251,9 @@ uint32_t eval(int p, int q) {
 		if (op == -2) {
 			printf("Bad expression!\n");
 			assert(0);
-		}
+	 	}
 		/*No dominated op*/
-		else if (op == -1) {
+	 	else if (op == -1) {
 			printf("Bad expression!\n");
 			assert(0);
 		}
@@ -273,8 +273,8 @@ uint32_t eval(int p, int q) {
 				return (val1 == val2);
 			default:
 				assert(0);
-		}
-	}
+	 	}
+	} 
 }
 
 uint32_t expr(char *e, bool *success) {
@@ -287,9 +287,7 @@ uint32_t expr(char *e, bool *success) {
   printf("nr_token = %d entered expr and if fail\n", nr_token);
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
+  *success = true;
   printf("%d\n", nr_token);
-  //*success = true;
-  printf("%d\n", nr_token);
-  //return eval(0, nr_token - 1);
-  return 0;
+  return eval(0, nr_token - 1);
 }
