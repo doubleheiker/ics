@@ -202,7 +202,7 @@ int find_dominated_op(int p, int q) {
 			lbras--;
 		}
 		if (lbras == 0) {
-			if (get_level(tokens[i].type) >= op_type) {
+			if (get_level(tokens[i].type) >= get_level(op_type)) {
 				op = i;
 				op_type = tokens[i].type;
 			}
