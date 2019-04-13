@@ -306,12 +306,6 @@ uint32_t expr(char *e, bool *success) {
   }
   /* TODO: Insert codes to evaluate the expression. */
   //printf("nr_token: %d\n", nr_token);
-  char str[]="$eax";
-  if (1){
-  if (1){
-  if (strcmp(str,"$eax")==0) {
-	  printf("true!");
-  }}}
   *success = true;
   return eval(0, nr_token - 1);
 }
