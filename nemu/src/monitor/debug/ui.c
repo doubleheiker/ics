@@ -196,7 +196,7 @@ static int cmd_p(char *args) {
 	if (*success == true) {
 		printf("%d\n", res);
 	}
-	else printf("Fail!");
+	else printf("Fail to analyze the expression!\n");
 	return 0;
 }
 
