@@ -191,10 +191,10 @@ static int cmd_p(char *args) {
 	printf("enter p and arg is: %s\n", arg);
 	res = expr(arg, success);
 	printf("res: %d, success: %d\n", res, *success);
-	if (*success == true) {
-		printf("%d\n", res);
-	}
-	else printf("Fail!");
+	//if (*success == true) {
+		//printf("%d\n", res);
+	//}
+	//else printf("Fail!");
 	return 0;
 }
 
