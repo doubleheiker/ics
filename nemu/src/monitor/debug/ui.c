@@ -190,7 +190,7 @@ static int cmd_p(char *args) {
 	uint32_t res;
 	printf("enter p and arg is: %s\n", arg);
 	res = expr(arg, success);
-	printf("%d\n", res);
+	printf("res: %d, success: %d\n", res, *success);
 	if (*success == true) {
 		printf("%d\n", res);
 	}
