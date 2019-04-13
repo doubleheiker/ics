@@ -97,9 +97,9 @@ static bool make_token(char *e) {
 			case TK_NOTYPE:
 				break;
 			case '+':
-				printf("plus case\n");
 				tokens[nr_token].type = '+';
 				nr_token++;
+				printf("%d", tokens[nr_token].type);
 				break;
 			case '-':
 				tokens[nr_token].type = '-';
