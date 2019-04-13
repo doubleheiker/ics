@@ -186,7 +186,12 @@ static int cmd_x(char *args) {
 
 static int cmd_p(char *args) {
 	bool *success = false;
-	expr(args, success);
+	uint32_t res;
+	res = expr(args, success);
+	if (*success == true) {
+		printf("%d", res);
+	}
+	else printf("Fail!");
 	return 0;
 }
 
