@@ -192,7 +192,7 @@ int get_level(int type) {
 
 int find_dominated_op(int p, int q) {
 	//printf("enter the dominated\n");
-	int lbras = 0, op = -1, op_type = -10;//op means the location of dominated op
+	int lbras = 0, op = -1, op_type = -1;//op means the location of dominated op
 	/*find the dominated op*/
 	for (int i = p; i <= q; i++) {
 		if (tokens[i].type == TK_LBRACKET) {
