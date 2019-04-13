@@ -288,7 +288,7 @@ uint32_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
   printf("%d\n", nr_token);
-  *success = true;
+  //*success = true;
   printf("%d\n", nr_token);
   //return eval(0, nr_token - 1);
   return 0;

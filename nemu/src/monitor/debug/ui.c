@@ -189,7 +189,7 @@ static int cmd_p(char *args) {
 	uint32_t res;
 	res = expr(args, success);
 	if (*success == true) {
-		printf("%d", res);
+		printf("%d\n", res);
 	}
 	else printf("Fail!");
 	return 0;
