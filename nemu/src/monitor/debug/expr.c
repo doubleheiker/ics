@@ -350,7 +350,7 @@ uint32_t eval(int p, int q) {
 		int op;
 		op = find_dominated_op(p, q);
 		printf("op: %d\n", op);//
-		/*
+		
 		if (p == op || tokens[op].type == TK_POINTOR || tokens[op].type == TK_NO) {
 			uint32_t val = eval(op+1, q);
 			switch (tokens[op].type) {
@@ -360,7 +360,8 @@ uint32_t eval(int p, int q) {
 					return !val;
 				default:
 					assert(0);
-		}*/
+			}
+		}
 		/*Wrong expression*/
 		if (op == -2) {
 			printf("Bad expression(3)!\n");
