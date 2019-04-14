@@ -226,6 +226,8 @@ bool check_parentheses(int p, int q) {
 
 int get_level(int type) {
 	switch (type) {
+		case TK_POINTOR:
+			return 2;
 		case '*':
 		case '/':
 			return 3;
