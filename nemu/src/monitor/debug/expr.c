@@ -11,7 +11,7 @@ enum {
   TK_REG = 260, TK_LBRACKET = 261, TK_RBRACKET = 262, TK_NOEQ = 263,
   TK_AND = 264, TK_OR = 265, TK_NO = 266, TK_EQ_BIG = 267,
   TK_EQ_SMALL = 268, TK_LSHIFT = 269, TK_RSHIFT = 270, TK_BIG = 271,
-  TK_SMALL = 272, TK_POINTOR = 273,
+  TK_SMALL = 272, TK_POINTOR = 273, TK_MINUS = 274,
 
   /* TODO: Add more token types */
 
@@ -360,6 +360,8 @@ uint32_t eval(int p, int q) {
 					return vaddr_read(val, 4);
 				case TK_NO:
 					return !val;
+				case TK_MINUS:
+					return -val;
 				default:
 					assert(0);
 			}
@@ -409,7 +411,9 @@ uint32_t expr(char *e, bool *success) {
 	if (tokens[i].type == '*' && (i == 0 || (tokens[i-1].type != TK_DEC && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i-1].type != TK_RBRACKET))) {
 		tokens[i].type = TK_POINTOR;
 	}
-	else continue;
+	if (tokens[i].type == '-' && (i == 0 || (tokens[i-1].type != TK_DEC && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i-1].type != TK_RBRACKET))) {
+		tokens[i].type = TK_MINUS;
+	}
   }
   return eval(0, nr_token - 1);
 }
