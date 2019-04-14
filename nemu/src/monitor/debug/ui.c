@@ -193,7 +193,7 @@ static int cmd_p(char *args) {
 	res = expr(args, success);
 	//printf("res: %d\n", res);
 	if (*success == true) {
-		printf("%d\n", res);
+		printf("dec: %d\thex: 0x%x\n", res, res);
 	}
 	else printf("Fail to analyze the expression!\n");
 	return 0;
