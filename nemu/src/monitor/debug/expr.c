@@ -365,7 +365,7 @@ uint32_t eval(int p, int q) {
 	else {
 		int op;
 		op = find_dominated_op(p, q);
-		printf("op: %d\n", op);//
+		//printf("op: %d\n", op);//
 		
 		if (p == op || tokens[op].type == TK_POINTOR || tokens[op].type == TK_NO) {
 			uint32_t val = eval(op+1, q);
