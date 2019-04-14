@@ -45,8 +45,8 @@ static struct rule {
   {">=", TK_EQ_SMALL},            // small or equal
   {"<<", TK_LSHIFT},              // left shift
   {">>", TK_RSHIFT},              // right shift
-  {"<", TK_BIG},                  // big
-  {">", TK_SMALL},                // small
+  {">", TK_BIG},                  // big
+  {"<", TK_SMALL},                // small
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
