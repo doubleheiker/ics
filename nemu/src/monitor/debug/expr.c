@@ -233,6 +233,7 @@ int get_level(int type) {
 		case '-':
 			return 4;
 		case TK_EQ:
+		case TK_NOEQ:
 			return 7;
 		default:
 			break;
