@@ -42,7 +42,7 @@ static struct rule {
   {"\\|\\|", TK_OR},              // or
   {"!", TK_NO},                   // no
   {">=", TK_EQ_BIG},              // big or equal
-  {">=", TK_EQ_SMALL},            // small or equal
+  {"<=", TK_EQ_SMALL},            // small or equal
   {"<<", TK_LSHIFT},              // left shift
   {">>", TK_RSHIFT},              // right shift
   {">", TK_BIG},                  // big
