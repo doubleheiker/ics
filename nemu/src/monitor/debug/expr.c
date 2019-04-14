@@ -239,6 +239,11 @@ int get_level(int type) {
 		case TK_LSHIFT:
 		case TK_RSHIFT:
 			return 5;
+		case TK_EQ_BIG:
+		case TK_EQ_SMALL:
+		case TK_BIG:
+		case TK_SMALL:
+			return 6;
 		case TK_EQ:
 		case TK_NOEQ:
 			return 7;
@@ -400,6 +405,14 @@ uint32_t eval(int p, int q) {
 				return (val1 << val2);
 			case TK_RSHIFT:
 				return (val1 >> val2);
+			case TK_EQ_BIG:
+				return (val1 >= val2);
+			case TK_EQ_SMALL:
+				return (val1 <= val2);
+			case TK_BIG:
+				return (val1 > val2);
+			case TK_SMALL:
+				return (val1 < val2);
 			default:
 				assert(0);
 	 	}
