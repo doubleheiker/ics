@@ -11,7 +11,7 @@ enum {
   TK_REG = 260, TK_LBRACKET = 261, TK_RBRACKET = 262, TK_NOEQ = 263,
   TK_AND = 264, TK_OR = 265, TK_NO = 266, TK_EQ_BIG = 267,
   TK_EQ_SMALL = 268, TK_LSHIFT = 269, TK_RSHIFT = 270, TK_BIG = 271,
-  TK_SMALL = 272
+  TK_SMALL = 272, TK_POINTOR = 273,
 
   /* TODO: Add more token types */
 
@@ -350,6 +350,17 @@ uint32_t eval(int p, int q) {
 		int op;
 		op = find_dominated_op(p, q);
 		printf("op: %d\n", op);//
+		/*
+		if (p == op || tokens[op].type == TK_POINTOR || tokens[op].type == TK_NO) {
+			uint32_t val = eval(op+1, q);
+			switch (tokens[op].type) {
+				case TK_POINTOR:
+					return vaddr_read(val, 4);
+				case TK_NO:
+					return !val;
+				default:
+					assert(0);
+		}*/
 		/*Wrong expression*/
 		if (op == -2) {
 			printf("Bad expression(3)!\n");
@@ -391,5 +402,12 @@ uint32_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
   //printf("nr_token: %d\n", nr_token);
   *success = true;
+  /*
+  for (int i = 0; i < nr_token; i++) {
+	if (tokens[i].type == '*' && (i == 0 || (tokens[i-1].type != TK_DEC && tokens[i-1].type != TK_HEX && tokens[i-1].type != TK_REG && tokens[i-1].type != TK_RBRACKET))) {
+		tokens[i].type = TK_POINTOR;
+	}
+	else continue;
+  }*/
   return eval(0, nr_token - 1);
 }
