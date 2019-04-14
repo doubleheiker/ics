@@ -286,8 +286,9 @@ uint32_t eval(int p, int q) {
 			res = reg_val(tokens[p].str);
 			if (res == -1) {
 				printf("Can not printf this reg value!");
+				assert(0);
 			}
-			return res;
+			else return res;
 		}
 		else {
 			printf("Bad expression(2)!\n");
