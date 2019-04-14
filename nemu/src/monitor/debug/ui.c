@@ -142,6 +142,7 @@ static int cmd_info(char *args) {
 
 static int cmd_x(char *args) {
 	char *arg = strtok(NULL, " ");
+	bool success = false;
 	/*Only input x*/
 	if (arg == NULL) {
 		printf("Please use 'help x' to see the usage of 'x'\n");
@@ -157,7 +158,8 @@ static int cmd_x(char *args) {
 
 	char *arg1 = strtok(NULL, " ");
 	vaddr_t vaddress;
-	sscanf(arg1, "%x", &vaddress);
+	vaddress = expr(arg1, &success);
+	//sscanf(arg1, "%x", &vaddress);
 	
 	/*Print address*/
 	for(int i = 0; i < n; i++) {
