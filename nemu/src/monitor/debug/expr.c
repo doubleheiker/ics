@@ -257,7 +257,7 @@ int reg_val(char *str) {
 		return res;
 	}
 	else if (strcasecmp(str, "$eip")==0) {
-		res = (uint32_t)&cpu.eip;
+		res = cpu.eip;
 		return res;
 	}
 	return 0;
