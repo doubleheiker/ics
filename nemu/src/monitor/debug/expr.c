@@ -8,7 +8,10 @@
 
 enum {
   TK_NOTYPE = 256, TK_EQ = 257, TK_DEC = 258, TK_HEX = 259,
-  TK_REG = 260, TK_LBRACKET = 261, TK_RBRACKET = 262
+  TK_REG = 260, TK_LBRACKET = 261, TK_RBRACKET = 262, TK_NOEQ = 263,
+  TK_AND = 264, TK_OR = 265, TK_NO = 266, TK_EQ_BIG = 267,
+  TK_EQ_SMALL = 268, TK_LSHIFT = 269, TK_RSHIFT = 270, TK_BIG = 271,
+  TK_SMALL = 272
 
   /* TODO: Add more token types */
 
@@ -34,10 +37,16 @@ static struct rule {
   {"-", '-'},                     // sub
   {"\\*", '*'},                   // mul
   {"/", '/'},                     // div
-  /*{"!=", TK_NOEQ},*/                // not equal
-  /*{"&&", TK_AND},*/                 // and
-  /*{"\\|\\|", TK_OR},*/              // or
-  /*{"!", TK_NO},*/                   // no
+  {"!=", TK_NOEQ},                // not equal
+  {"&&", TK_AND},                 // and
+  {"\\|\\|", TK_OR},              // or
+  {"!", TK_NO},                   // no
+  {">=", TK_EQ_BIG},              // big or equal
+  {">=", TK_EQ_SMALL},            // small or equal
+  {"<<", TK_LSHIFT},              // left shift
+  {">>", TK_RSHIFT},              // right shift
+  {"<", TK_BIG},                  // big
+  {">", TK_SMALL},                // small
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -139,6 +148,42 @@ static bool make_token(char *e) {
 			case TK_REG:
 				tokens[nr_token].type = TK_REG;
 				strncpy(tokens[nr_token].str, substr_start, substr_len);
+				nr_token++;
+				break;
+			case TK_NOEQ:
+				tokens[nr_token].type = TK_NOEQ;
+				nr_token++;
+				break;
+			case TK_AND:
+				tokens[nr_token].type = TK_AND;
+				nr_token++;
+				break;
+			case TK_OR:
+				tokens[nr_token].type = TK_OR;
+				nr_token++;
+				break;
+			case TK_NO:
+				tokens[nr_token].type = TK_NO;
+				nr_token++;
+				break;
+			case TK_EQ_BIG:
+				tokens[nr_token].type = TK_EQ_BIG;
+				nr_token++;
+				break;
+			case TK_EQ_SMALL:
+				tokens[nr_token].type = TK_EQ_SMALL;
+				nr_token++;
+				break;
+			case TK_LSHIFT:
+				tokens[nr_token].type = TK_LSHIFT;
+				nr_token++;
+				break;
+			case TK_BIG:
+				tokens[nr_token].type = TK_BIG;
+				nr_token++;
+				break;
+			case TK_SMALL:
+				tokens[nr_token].type = TK_SMALL;
 				nr_token++;
 				break;
          // default: TODO();
