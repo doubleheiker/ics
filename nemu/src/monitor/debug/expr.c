@@ -247,6 +247,10 @@ int get_level(int type) {
 		case TK_EQ:
 		case TK_NOEQ:
 			return 7;
+		case TK_AND:
+			return 11;
+		case TK_OR:
+			return 12;
 		default:
 			break;
 	}
@@ -413,6 +417,10 @@ uint32_t eval(int p, int q) {
 				return (val1 > val2);
 			case TK_SMALL:
 				return (val1 < val2);
+			case TK_AND:
+				return (val1 && val2);
+			case TK_OR:
+				return (val1 || val2);
 			default:
 				assert(0);
 	 	}
