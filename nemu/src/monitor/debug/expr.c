@@ -135,6 +135,7 @@ static bool make_token(char *e) {
 			case TK_DEC:
 				tokens[nr_token].type = TK_DEC;
 				strncpy(tokens[nr_token].str, substr_start, substr_len);
+				tokens[nr_token].str[substr_len] = '\0';
 				//printf("%s\n", tokens[nr_token].str);
 				nr_token++;
 				break;
@@ -149,6 +150,7 @@ static bool make_token(char *e) {
 			case TK_REG:
 				tokens[nr_token].type = TK_REG;
 				strncpy(tokens[nr_token].str, substr_start, substr_len);
+				tokens[nr_token].str[substr_len] = '\0';
 				nr_token++;
 				break;
 			case TK_NOEQ:
