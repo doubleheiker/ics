@@ -159,6 +159,10 @@ static int cmd_x(char *args) {
 	char *arg1 = strtok(NULL, " ");
 	vaddr_t vaddress;
 	vaddress = expr(arg1, &success);
+	if (success == false) {
+		printf("Wrong address!\n");
+		return false;
+	}
 	//sscanf(arg1, "%x", &vaddress);
 	
 	/*Print address*/
