@@ -236,6 +236,9 @@ int get_level(int type) {
 		case '+':
 		case '-':
 			return 4;
+		case TK_LSHIFT:
+		case TK_RSHIFT:
+			return 5;
 		case TK_EQ:
 		case TK_NOEQ:
 			return 7;
@@ -393,6 +396,10 @@ uint32_t eval(int p, int q) {
 				return (val1 == val2);
 			case TK_NOEQ:
 				return (val1 != val2);
+			case TK_LSHIFT:
+				return (val1 << val2);
+			case TK_RSHIFT:
+				return (val1 >> val2);
 			default:
 				assert(0);
 	 	}
