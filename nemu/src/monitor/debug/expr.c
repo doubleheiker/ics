@@ -228,6 +228,38 @@ int reg_val(char *str) {
 		res = cpu.eax;
 		return res;
 	}
+	else if (strcasecmp(str, "$ecx")==0) {
+		res = cpu.ecx;
+		return res;
+	}
+	else if (strcasecmp(str, "$edx")==0) {
+		res = cpu.edx;
+		return res;
+	}
+	else if (strcasecmp(str, "$ebx")==0) {
+		res = cpu.ebx;
+		return res;
+	}
+	else if (strcasecmp(str, "$esp")==0) {
+		res = cpu.esp;
+		return res;
+	}
+	else if (strcasecmp(str, "$ebp")==0) {
+		res = cpu.ebp;
+		return res;
+	}
+	else if (strcasecmp(str, "$esi")==0) {
+		res = cpu.esi;
+		return res;
+	}
+	else if (strcasecmp(str, "$edi")==0) {
+		res = cpu.edi;
+		return res;
+	}
+	else if (strcasecmp(str, "$eip")==0) {
+		res = cpu.eip;
+		return res;
+	}
 	return 0;
 }
 
