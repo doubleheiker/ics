@@ -224,7 +224,7 @@ int find_dominated_op(int p, int q) {
 
 int reg_val(char *str) {
 	uint32_t res;
-	if (strcmp(str, "$eax")==0) {
+	if (strcasecmp(str, "$eax")==0) {
 		res = cpu.eax;
 		return res;
 	}
