@@ -260,7 +260,7 @@ int reg_val(char *str) {
 		res = cpu.eip;
 		return res;
 	}
-	return 0;
+	else return -1;
 }
 
 uint32_t eval(int p, int q) {
@@ -284,6 +284,9 @@ uint32_t eval(int p, int q) {
 		
 		else if (tokens[p].type == TK_REG) {
 			res = reg_val(tokens[p].str);
+			if (res == -1) {
+				printf("Can not printf this reg value!");
+			}
 			return res;
 		}
 		else {
