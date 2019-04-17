@@ -219,7 +219,7 @@ static int cmd_w(char *args) {
 		printf("Wrong expression!\n");
 		exit(0);
 	}
-	printf("Old value = %d\n", p->old_val);
+	printf("Old value = 0x%x\n", p->old_val);
 	return 0;
 }
 
