@@ -20,4 +20,83 @@ void init_wp_pool() {
 
 /* TODO: Implement the functionality of watchpoint */
 
+WP* new_wp() {
+	WP *p;
+	p = free_;
+	if (p == NULL) {
+		printf("No free room!");
+		assert(0);
+	}
+	free_ = free_->next;
+	p->next = head;
+	head = p;
+	return head;
+}
+
+void free_wp(WP *wp) {
+	WP *pre, *p;
+	/*No watchpoint*/
+	if (head == NULL) {
+		printf("NO watchpoint at all!");
+		assert(0);
+	}
+
+	pre = head;
+	p = free_;
+	/*Have free watchpoint*/
+	if (free_ != NULL) {
+		while (p->next != NULL){
+			p = p->next;
+		}
+
+		/*Head node is just the wp node*/
+		if (head == wp) {
+			head = head->next;
+			p->next = wp;
+		}	
+		/*find the pre node of wp*/
+		else{
+			while (pre->next != NULL && pre->next != wp){
+				pre = pre->next;
+			}
+			if (pre->next == NULL) printf("No such wp!");
+			else if(pre->next == wp) {
+				p->next = wp;
+				pre->next = pre->next->next;
+			}
+			else {
+				printf("Unknown Error!");
+				assert(0);
+			}
+		}
+	}
+	/*No free point*/
+	else {
+		/*Head node is just the wp node*/
+		if (head == wp) {
+			head = head->next;
+			free_ = wp;
+		}
+		/*find the pre node of wp*/
+		else{
+			while (pre->next != NULL && pre->next != wp){
+				pre = pre->next;
+			}
+			if (pre->next == NULL) printf("No such wp!");
+			else if(pre->next == wp) {
+				free_ = wp;
+				pre->next = pre->next->next;
+			}
+			else {
+				printf("Unknown Error!");
+				assert(0);
+			}
+		}
+	}
+	wp->next =NULL;
+	wp->new_val = 0;
+	wp->old_val = 0;
+	wp->expr[0] = '\0';
+}
+
 

@@ -46,6 +46,8 @@ static int cmd_x(char *args);
 
 static int cmd_p(char *args);
 
+static int cmd_w(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -59,6 +61,7 @@ static struct {
   { "info", "Print the registers' states, 'info r': print all registers' states", cmd_info },
   { "x", "Scan the memory, usage: x [N] [addr]", cmd_x },
   { "p", "evaluate expression by regex", cmd_p},
+  { "w", "build a watchpoint", cmd_w},
 
   /* TODO: Add more commands */
 
@@ -202,6 +205,21 @@ static int cmd_p(char *args) {
 		printf("dec: %d\thex: 0x%x\n", res, res);
 	}
 	else printf("Fail to analyze the expression!\n");
+	return 0;
+}
+
+static int cmd_w(char *args) {
+	WP *p;
+	bool success = false;
+	p = new_wp();
+	printf("Set watchpoint #%d\nexpr = %s\n", p->NO, args);
+	p->old_val = expr(args, &success);
+	strcpy(p->expr,args);
+	if (!success) {
+		printf("Wrong expression!\n");
+		exit(0);
+	}
+	printf("Old value = %d\n", p->old_val);
 	return 0;
 }
 
