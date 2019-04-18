@@ -137,7 +137,8 @@ static int cmd_info(char *args) {
 
 	/*command 'w'*/
 	else if (strcmp(arg, "w") == 0){
-		/*In PA1.3*/
+		printf("NO\texpr\tOld Value\n");
+		list_watchpoint();
 	}
 
 	else {
