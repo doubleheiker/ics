@@ -48,6 +48,8 @@ static int cmd_p(char *args);
 
 static int cmd_w(char *args);
 
+static int cmd_d(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -60,8 +62,9 @@ static struct {
   { "si", "Execute N steps, 'si' without [N] will execute 'si 1' as defualt", cmd_si },
   { "info", "Print the registers' states, 'info r': print all registers' states", cmd_info },
   { "x", "Scan the memory, usage: x [N] [addr]", cmd_x },
-  { "p", "evaluate expression by regex", cmd_p},
-  { "w", "build a watchpoint", cmd_w},
+  { "p", "Evaluate expression by regex", cmd_p },
+  { "w", "Build a watchpoint", cmd_w },
+  { "d", "Delete a watchpoint", cmd_d},
 
   /* TODO: Add more commands */
 
@@ -219,6 +222,13 @@ static int cmd_w(char *args) {
 		assert(0);
 	}
 	printf("Old value = 0x%x\n", old_val);
+	return 0;
+}
+
+static int cmd_d(char *args) {
+	int num;
+	sscanf(args, "%d", &num);
+	delete_watchpoint(num);
 	return 0;
 }
 

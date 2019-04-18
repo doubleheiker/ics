@@ -121,6 +121,16 @@ bool delete_watchpoint(int NO) {
 		WP *p;
 		p = &wp_pool[NO];
 		free_wp(p);
+		printf("Delete watchpoint %d successfully!", NO);
 		return true;
+	}
+}
+
+void list_watchpoint() {
+	WP *p;
+	p = head;
+	while(p != NULL) {
+		printf("%d\t%s\t0x%08x", p->NO, p->expr, p->old_val);
+		p = p->next;
 	}
 }
