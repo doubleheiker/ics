@@ -111,3 +111,16 @@ int set_watchpoint(char *e) {
 	}
 	return p->NO;
 }
+
+bool delete_watchpoint(int NO) {
+	if (NO >= NR_WP) {
+		printf("The NO is no more than 32!\n");
+		return false;
+	}
+	else {
+		WP *p;
+		p = &wp_pool[NO];
+		free_wp(p);
+		return true;
+	}
+}
