@@ -50,6 +50,8 @@ static int cmd_w(char *args);
 
 static int cmd_d(char *args);
 
+static int cmd_b(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -64,7 +66,8 @@ static struct {
   { "x", "Scan the memory, usage: x [N] [addr]", cmd_x },
   { "p", "Evaluate expression by regex", cmd_p },
   { "w", "Build a watchpoint", cmd_w },
-  { "d", "Delete a watchpoint", cmd_d},
+  { "d", "Delete a watchpoint", cmd_d },
+  { "b", "Build a breakpoint", cmd_b },
 
   /* TODO: Add more commands */
 
@@ -230,6 +233,20 @@ static int cmd_d(char *args) {
 	int num;
 	sscanf(args, "%d", &num);
 	delete_watchpoint(num);
+	return 0;
+}
+
+static int cmd_b(char *args) {
+	bool success = false;
+	uint32_t val = expr(args, &success);
+	if (!success) {
+		printf("Wrong expression!\n");
+		assert(0);
+	}
+	char str[32];
+	sprintf(str, "$eip == %x", val);
+	printf("Set breakpoint at: 0x%08x\n", val);
+	set_watchpoint(str);
 	return 0;
 }
 
