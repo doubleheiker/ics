@@ -52,3 +52,6 @@ gdb: $(BINARY)
 
 clean: 
 	rm -rf $(BUILD_DIR)
+
+count:
+	find . -name "*.[hc]" | xargs grep '^.' | wc -l
