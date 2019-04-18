@@ -121,7 +121,7 @@ bool delete_watchpoint(int NO) {
 		WP *p;
 		p = &wp_pool[NO];
 		free_wp(p);
-		printf("Delete watchpoint %d successfully!", NO);
+		printf("Delete watchpoint %d successfully!\n", NO);
 		return true;
 	}
 }
