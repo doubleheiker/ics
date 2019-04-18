@@ -244,7 +244,7 @@ static int cmd_b(char *args) {
 		assert(0);
 	}
 	char str[32];
-	sprintf(str, "$eip == %x", val);
+	sprintf(str, "$eip == 0x%x", val);
 	printf("Set breakpoint at: 0x%08x\n", val);
 	set_watchpoint(str);
 	return 0;
