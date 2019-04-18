@@ -209,17 +209,16 @@ static int cmd_p(char *args) {
 }
 
 static int cmd_w(char *args) {
-	WP *p;
+	int i, old_val;
 	bool success = false;
-	p = new_wp();
-	printf("Set watchpoint #%d\nexpr = %s\n", p->NO, args);
-	p->old_val = expr(args, &success);
-	strcpy(p->expr,args);
+	i = set_watchpoint(args);
+	printf("Set watchpoint #%d\nexpr = %s\n", i, args);
+	old_val = expr(args, &success);
 	if (!success) {
 		printf("Wrong expression!\n");
-		exit(0);
+		assert(0);
 	}
-	printf("Old value = 0x%x\n", p->old_val);
+	printf("Old value = 0x%x\n", old_val);
 	return 0;
 }
 

@@ -99,4 +99,15 @@ void free_wp(WP *wp) {
 	wp->expr[0] = '\0';
 }
 
-
+int set_watchpoint(char *e) {
+	WP *p;
+	bool success = false;
+	p = new_wp();
+	strcpy(p->expr, e);
+	p->old_val = expr(e, &success);
+	if (!success) {
+		printf("Wrong Expression\n");
+		assert(0);
+	}
+	return p->NO;
+}
