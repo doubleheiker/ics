@@ -134,3 +134,18 @@ void list_watchpoint() {
 		p = p->next;
 	}
 }
+
+WP* scan_watchpoint() {
+	WP *p;
+	bool success = false;
+	p = head;
+	while (p != NULL) {
+		uint32_t temp;
+		temp = expr(p->expr, &success);
+		if (temp != p->old_val) {
+			return p;
+		}
+		p = p->next;
+	}
+	return NULL;
+}
