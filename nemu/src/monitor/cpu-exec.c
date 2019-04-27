@@ -31,7 +31,6 @@ void cpu_exec(uint64_t n) {
 
 #ifdef DEBUG
     /* TODO: check watchpoints here. */
-	/*
 	WP *p;
 	bool success = false;
 	p = scan_watchpoint();
@@ -43,12 +42,10 @@ void cpu_exec(uint64_t n) {
 		printf("old value = 0x%08x\nnew value = 0x%08x\n", p->old_val, p->new_val);
 		nemu_state = NEMU_STOP;
 		printf("promgram paused\n");
-		*/
 		/*cover old_val by new_val*/
-		/*p->old_val = p->new_val;
+		p->old_val = p->new_val;
 	}
-	else continue;
-	*/
+	//else continue;
 
 
 #endif
