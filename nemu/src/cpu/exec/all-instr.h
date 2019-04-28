@@ -9,3 +9,8 @@ make_EHelper(nemu_trap);
 
 /*control.c*/
 make_EHelper(call);
+
+/*data-mov.c*/
+//make_EHelper(mov);
+make_EHelper(push);
+make_EHelper(pop);

@@ -6,13 +6,29 @@ make_EHelper(mov) {
 }
 
 make_EHelper(push) {
-  TODO();
+  //TODO();
+  //如果寄存器取到1字节,需要带符号位截断
+  if (id_dest->width == 1) {
+	  uint8_t utmp = id_dest->val;
+	  int8_t tmp = utmp;
+	  id_dest->val = tmp;
+  }
+  rtl_push(&id_dest->val);
 
   print_asm_template1(push);
 }
 
 make_EHelper(pop) {
-  TODO();
+  //TODO();
+  rtl_pop(&t0);
+
+  if (id_dest->width == 1) {
+	  uint8_t utmp = t0;
+	  int8_t tmp = utmp;
+	  id_dest->val = tmp;
+  }
+  else id_dest->val = t0;
+  operand_write(id_dest, &id_dest->val);
 
   print_asm_template1(pop);
 }
