@@ -17,3 +17,6 @@ make_EHelper(pop);
 
 /*arith.c*/
 make_EHelper(sub);
+
+/*logic.c*/
+make_EHelper(xor);
