@@ -33,7 +33,7 @@ static make_EHelper(2byte_esc);
 #define make_group(name, item0, item1, item2, item3, item4, item5, item6, item7) \
   static opcode_entry concat(opcode_table_, name) [8] = { \
     /* 0x00 */	item0, item1, item2, item3, \
-    /* 0x04 */	item4, item5, item6, item7  \
+    /* 0x04 */	item4, EX(sub), item6, item7  \
   }; \
 static make_EHelper(name) { \
   idex(eip, &concat(opcode_table_, name)[decoding.ext_opcode]); \
@@ -82,8 +82,8 @@ opcode_entry opcode_table [512] = {
   /* 0x1c */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x20 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x24 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0x28 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0x2c */	EMPTY, EMPTY, EMPTY, EMPTY,
+  /* 0x28 */	IDEXW(G2E, sub, 1), IDEX(G2E, sub), IDEXW(E2G, sub, 1), IDEX(E2G, sub),
+  /* 0x2c */	IDEXW(I2a, sub, 1), IDEX(I2a, sub), EMPTY, EMPTY,
   /* 0x30 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x34 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x38 */	EMPTY, EMPTY, EMPTY, EMPTY,

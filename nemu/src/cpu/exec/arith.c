@@ -7,7 +7,22 @@ make_EHelper(add) {
 }
 
 make_EHelper(sub) {
-  TODO();
+  //TODO();
+  rtl_sub(&t2, &id_dest->val, &id_src->val);
+  rtl_sltu(&t3, &id_dest->val, &t2);
+  //set CF
+  rtl_set_CF(&t3);
+  operand_write(id_dest, &t2);
+
+  //set ZF SF
+  rtl_update_ZFSF(&t2, id_dest->width);
+
+  //set OF
+  rtl_xor(&t0, &id_dest->val, &id_src->val);
+  rtl_xor(&t0, &id_dest->val, &t2);
+  rtl_and(&t1, &t0, &t2);
+  rtl_msb(&t0, &t0, id_dest->width);
+  rtl_set_OF(&t0);
 
   print_asm_template2(sub);
 }

@@ -14,3 +14,6 @@ make_EHelper(call);
 //make_EHelper(mov);
 make_EHelper(push);
 make_EHelper(pop);
+
+/*arith.c*/
+make_EHelper(sub);
