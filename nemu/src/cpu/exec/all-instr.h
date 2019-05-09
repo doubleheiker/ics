@@ -19,6 +19,7 @@ make_EHelper(pop);
 make_EHelper(lea);
 
 /*arith.c*/
+make_EHelper(add);
 make_EHelper(sub);
 
 /*logic.c*/
