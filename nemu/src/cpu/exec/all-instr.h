@@ -21,6 +21,7 @@ make_EHelper(lea);
 /*arith.c*/
 make_EHelper(add);
 make_EHelper(sub);
+make_EHelper(cmp);
 
 /*logic.c*/
 make_EHelper(xor);
