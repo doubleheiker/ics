@@ -23,6 +23,7 @@ make_EHelper(movsx);
 /*arith.c*/
 make_EHelper(add);
 make_EHelper(sub);
+make_EHelper(adc);
 make_EHelper(cmp);
 
 /*logic.c*/
