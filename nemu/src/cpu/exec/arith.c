@@ -70,8 +70,7 @@ make_EHelper(cmp) {
 
 make_EHelper(inc) {
   //TODO();
-  t3 = 1;
-  rtl_add(&t2, &id_dest->val, &t3);
+  rtl_addi(&t2, &id_dest->val, 1);
   operand_write(id_dest, &t2);
 
   //set SFZF
@@ -90,8 +89,7 @@ make_EHelper(inc) {
 
 make_EHelper(dec) {
   //TODO();
-  t3 = 1;
-  rtl_sub(&t2, &id_dest->val, &t3);
+  rtl_subi(&t2, &id_dest->val, 1);
   operand_write(id_dest, &t2);
 
   //set SFZF
