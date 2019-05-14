@@ -38,8 +38,8 @@ make_EHelper(sub) {
 
   //set OF
   rtl_xor(&t0, &id_dest->val, &id_src->val);
-  rtl_xor(&t0, &id_dest->val, &t2);
-  rtl_and(&t1, &t0, &t2);
+  rtl_xor(&t2, &id_dest->val, &t2);
+  rtl_and(&t0, &t0, &t2);
   rtl_msb(&t0, &t0, id_dest->width);
   rtl_set_OF(&t0);
 
@@ -48,31 +48,31 @@ make_EHelper(sub) {
 
 make_EHelper(cmp) {
   //TODO();
-  //rtl_sub(&t2, &id_dest->val, &id_src->val);
-  //rtl_sltu(&t3, &id_dest->val, &t2);
+  rtl_sub(&t2, &id_dest->val, &id_src->val);
+  rtl_sltu(&t3, &id_dest->val, &t2);
   //set CF
-  //rtl_set_CF(&t3);
+  rtl_set_CF(&t3);
 
   //set ZF SF
-  //rtl_update_ZFSF(&t2, id_dest->width);
-  //printf("SF:%d ZF:%d\n", cpu.eflags.SF, cpu.eflags.ZF);
+  rtl_update_ZFSF(&t2, id_dest->width);
+  printf("SF:%d ZF:%d\n", cpu.eflags.SF, cpu.eflags.ZF);
 
   //set OF
-  //rtl_xor(&t0, &id_dest->val, &id_src->val);
-  //rtl_xor(&t0, &id_dest->val, &t2);
-  //rtl_and(&t1, &t0, &t2);
-  //rtl_msb(&t0, &t0, id_dest->width);
-  //rtl_set_OF(&t0);
-  //printf("OF:%d\n", cpu.eflags.OF);
-  rtl_sext(&t1, &id_dest->val, id_dest->width);
-  rtl_sext(&t2, &id_src->val, id_src->width);
+  rtl_xor(&t0, &id_dest->val, &id_src->val);
+  rtl_xor(&t2, &id_dest->val, &t2);
+  rtl_and(&t0, &t0, &t2);
+  rtl_msb(&t0, &t0, id_dest->width);
+  rtl_set_OF(&t0);
+  printf("OF:%d\n", cpu.eflags.OF);
+  //rtl_sext(&t1, &id_dest->val, id_dest->width);
+  //rtl_sext(&t2, &id_src->val, id_src->width);
 
-  rtl_sub(&t0, &t1, &t2);
-  rtl_sltu(&t3, &t1, &t0);
-  rtl_set_CF(&t3);
-  t3 = ((((int32_t)(t1)<0)==(((int32_t)(t2)>>31)==0))&&(((int32_t)(t0)<0)!=((int32_t)(t1)<0)));
-  rtl_set_OF(&t3);
-  rtl_update_ZFSF(&t0, 4);
+  //rtl_sub(&t0, &t1, &t2);
+  //rtl_sltu(&t3, &t1, &t0);
+  //rtl_set_CF(&t3);
+  //t3 = ((((int32_t)(t1)<0)==(((int32_t)(t2)>>31)==0))&&(((int32_t)(t0)<0)!=((int32_t)(t1)<0)));
+  //rtl_set_OF(&t3);
+  //rtl_update_ZFSF(&t0, 4);
   //printf("SF:%d OF:%d\nZF:%d\n", cpu.eflags.SF, cpu.eflags.OF, cpu.eflags.ZF);
 
   print_asm_template2(cmp);
