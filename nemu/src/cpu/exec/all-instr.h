@@ -8,6 +8,7 @@ make_EHelper(inv);
 make_EHelper(nemu_trap);
 
 /*control.c*/
+make_EHelper(jmp);
 make_EHelper(jcc);
 make_EHelper(call);
 make_EHelper(ret);

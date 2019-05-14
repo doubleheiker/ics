@@ -139,19 +139,20 @@ static inline void rtl_not(rtlreg_t* dest) {
 static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- signext(src1[(width * 8 - 1) .. 0])
   //TODO();
-  if (width == 4) {
-	  *dest = *src1;
-  }
-  else if (width == 2) {
-	  uint16_t val = *src1;
-	  int16_t tmp = val;
-	  *dest = tmp;
-  }
-  else if (width == 1) {
-	  uint8_t val = *src1;
-	  int8_t tmp = val;
-	  *dest = tmp;
-  }
+  //if (width == 4) {
+	//  *dest = *src1;
+  //}
+  //else if (width == 2) {
+	 // uint16_t val = *src1;
+	 // int16_t tmp = val;
+	 // *dest = tmp;
+  //}
+  //else if (width == 1) {
+	  //uint8_t val = *src1;
+	  //int8_t tmp = val;
+	//  *dest = tmp;
+  //}
+  *dest = ((*src1 << (8*(4-width))) >> (8*(4-width)));
 }
 
 static inline void rtl_push(const rtlreg_t* src1) {
