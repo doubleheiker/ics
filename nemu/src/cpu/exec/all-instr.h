@@ -33,6 +33,7 @@ make_EHelper(cmp);
 make_EHelper(inc);
 make_EHelper(dec);
 make_EHelper(imul2);
+make_EHelper(div);
 make_EHelper(idiv);
 
 /*logic.c*/
