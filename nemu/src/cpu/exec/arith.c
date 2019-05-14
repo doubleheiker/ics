@@ -55,7 +55,7 @@ make_EHelper(cmp) {
 
   //set ZF SF
   rtl_update_ZFSF(&t2, id_dest->width);
-  printf("SF:%d ZF:%d\n", cpu.eflags.SF, cpu.eflags.ZF);
+  //printf("SF:%d ZF:%d\n", cpu.eflags.SF, cpu.eflags.ZF);
 
   //set OF
   rtl_xor(&t0, &id_dest->val, &id_src->val);
@@ -63,7 +63,7 @@ make_EHelper(cmp) {
   rtl_and(&t0, &t0, &t1);
   rtl_msb(&t0, &t0, id_dest->width);
   rtl_set_OF(&t0);
-  printf("OF:%d\n", cpu.eflags.OF);
+  //printf("OF:%d\n", cpu.eflags.OF);
   //rtl_sext(&t1, &id_dest->val, id_dest->width);
   //rtl_sext(&t2, &id_src->val, id_src->width);
 

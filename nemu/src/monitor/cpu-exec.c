@@ -8,7 +8,7 @@
  * This is useful when you use the `si' command.
  * You can modify this value as you want.
  */
-#define MAX_INSTR_TO_PRINT 16
+#define MAX_INSTR_TO_PRINT 0xFFFFFFFF
 
 int nemu_state = NEMU_STOP;
 
