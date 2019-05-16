@@ -39,12 +39,13 @@ static inline make_DopHelper(SI) {
    op->simm = ???
    */
   //TODO();
-  op->simm = (int32_t)instr_fetch(eip, op->width);
-  printf("simm: %d\n", op->simm);
+  op->imm = instr_fetch(eip, op->width);
+  //printf("simm: %d\n", op->simm);
   /*sign the immediate*/
-  op->simm = ((op->simm << (8 * (4 - op->width))) >> (8 * (4 - op->width)));
-
-  rtl_li(&op->val, op->simm);
+  //op->simm = ((op->simm << (8 * (4 - op->width))) >> (8 * (4 - op->width)));
+  rtl_sext(&op->val, &op->imm, op->width);
+  op->simm = op->val;
+  //rtl_li(&op->val, op->simm);
 
 #ifdef DEBUG
   snprintf(op->str, OP_STR_SIZE, "$0x%x", op->simm);
