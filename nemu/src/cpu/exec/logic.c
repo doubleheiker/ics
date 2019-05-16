@@ -99,7 +99,7 @@ make_EHelper(rol) {
 
   rtl_update_ZFSF(&t0, id_dest->width);
 
-  print_asm_template2(shl)
+  print_asm_template2(shl);
 }
 
 make_EHelper(setcc) {
