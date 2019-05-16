@@ -2,6 +2,8 @@
 #include <x86.h>
 
 #define RTC_PORT 0x48   // Note that this is not standard
+#define DATAREG 0x60    // Keyboard data reg
+#define FLAGREG 0x64    // Keyboard flag reg
 static unsigned long boot_time;
 
 void _ioe_init() {
@@ -40,5 +42,9 @@ void _draw_sync() {
 }
 
 int _read_key() {
-  return _KEY_NONE;
+  uint32_t keys = _KEY_NONE;
+  if (inb(FLAGREG) & 1) {
+	  keys = inl(DATAREG);
+  }
+  return keys;
 }
