@@ -40,6 +40,7 @@ static inline make_DopHelper(SI) {
    */
   //TODO();
   op->simm = (int32_t)instr_fetch(eip, op->width);
+  printf("simm: %d\n", op->simm);
   /*sign the immediate*/
   op->simm = ((op->simm << (8 * (4 - op->width))) >> (8 * (4 - op->width)));
 
