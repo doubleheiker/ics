@@ -20,6 +20,8 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   t.low = vaddr_read(addr, 4);
   t.high = vaddr_read(addr + 4, 4);
 
+  printf("t.low: 0x%08x, t.high: 0x%08x\n", t.low, t.high);
+
   /*if (t.gd.present == 0) {
 	  printf("invaild P");
 	  assert(0);//invaild p
