@@ -7,7 +7,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
    */
 
   //TODO();
-  vaddr_t addr;
+  /*vaddr_t addr;
   addr = NO * 8 + cpu.idtr.base;
   printf("NO: %d, base: 0x%08x, addr: 0x%08x\n", NO, cpu.idtr.base, addr);
 
@@ -21,14 +21,14 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   t.low = vaddr_read(addr, 4);
   t.high = vaddr_read(addr + 4, 4);
 
-  printf("t.low: 0x%08x, t.high: 0x%08x\n", t.low, t.high);
+  printf("t.low: 0x%08x, t.high: 0x%08x\n", t.low, t.high);*/
 
   /*if (t.gd.present == 0) {
 	  printf("invaild P");
 	  assert(0);//invaild p
   }*/
 
-  rtl_push(&cpu.EFLAGS);
+  /*rtl_push(&cpu.EFLAGS);
   t0 = cpu.cs;
   rtl_push(&t0);
   rtl_push(&ret_addr);
@@ -36,7 +36,18 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   decoding.is_jmp = 1;
   decoding.jmp_eip = (t.gd.offset_15_0 && 0xffff) + ((t.gd.offset_31_16 && 0xffff)<<16);
   printf("jmp: %x\n", decoding.jmp_eip);
-  cpu.eflags.IF = 0;
+  cpu.eflags.IF = 0;*/
+  rtl_push(&cpu.EFLAGS);
+  cpu.eflags.IF=0;
+  t0 = cpu.cs;
+  rtl_push(&t0);
+  rtl_push(&ret_addr);
+  uint32_t tmp1,tmp2;
+  tmp1 = vaddr_read(cpu.idtr.base+8*NO,2);//limit  
+  tmp2 = vaddr_read(cpu.idtr.base+8*NO+6,2);//base    
+  tmp1=tmp1+(tmp2<<16);//组合成目标地址  
+  decoding.jmp_eip=tmp1;
+  decoding.is_jmp=1; 
 }
 
 void dev_raise_intr() {
