@@ -21,8 +21,8 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   t.high = vaddr_read(addr + 4, 4);
 
   if (t.gd.present == 0) {
-	  assert(0);//invaild p
 	  printf("invaild P");
+	  assert(0);//invaild p
   }
 
   rtl_push(&cpu.EFLAGS);
