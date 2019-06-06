@@ -32,7 +32,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   
   decoding.is_jmp = 1;
   decoding.jmp_eip = (t.gd.offset_15_0 && 0xffff) | ((t.gd.offset_31_16 && 0xffff)<<16);
-  printf("%x\n", decoding.jmp_eip);
+  printf("jmp: %x\n", decoding.jmp_eip);
   cpu.eflags.IF = 0;
 }
 
