@@ -20,10 +20,10 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   t.low = vaddr_read(addr, 4);
   t.high = vaddr_read(addr + 4, 4);
 
-  if (t.gd.present == 0) {
+  /*if (t.gd.present == 0) {
 	  printf("invaild P");
 	  assert(0);//invaild p
-  }
+  }*/
 
   rtl_push(&cpu.EFLAGS);
   t0 = cpu.cs;
