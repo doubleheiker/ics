@@ -25,6 +25,7 @@ make_EHelper(movsx);
 make_EHelper(cltd);
 make_EHelper(cwtl);
 make_EHelper(leave);
+make_EHelper(pusha);
 
 /*arith.c*/
 make_EHelper(add);
