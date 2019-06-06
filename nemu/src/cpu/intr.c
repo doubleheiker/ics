@@ -6,7 +6,33 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
    * That is, use ``NO'' to index the IDT.
    */
 
-  TODO();
+  //TODO();
+  vaddr_t addr;
+  addr = NO * 8 + cpu.idtr.base;
+
+  union {
+	  GateDesc gd;
+	  struct {
+		  uint32_t low;
+		  uint32_t high;
+	  };
+  } t;
+  t.low = vaddr_read(addr, 4);
+  t.high = vaddr_read(addr + 4, 4);
+
+  if (t.gd.present == 0) {
+	  assert(0);//invaild p
+	  printf("invaild P");
+  }
+
+  rtl_push(&cpu.EFLAGS);
+  t0 = cpu.cs;
+  rtl_push(&t0);
+  rtl_push(&ret_addr);
+  
+  decoding.is_jmp = 1;
+  decoding.jmp_eip = (t.gd.offset_15_0 && 0xffff) | ((t.gd.offset_31_16 && 0xffff)<<16);
+  cpu.eflags.IF = 0;
 }
 
 void dev_raise_intr() {
