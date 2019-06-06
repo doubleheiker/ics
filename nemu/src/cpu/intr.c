@@ -34,7 +34,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   rtl_push(&ret_addr);
   
   decoding.is_jmp = 1;
-  decoding.jmp_eip = (t.gd.offset_15_0 && 0xffff) | ((t.gd.offset_31_16 && 0xffff)<<16);
+  decoding.jmp_eip = (t.gd.offset_15_0 & 0xffff) | ((t.gd.offset_31_16 & 0xffff)<<16);
   printf("off15: %x\noff31: %x\njmp: %x\n", t.gd.offset_15_0, t.gd.offset_31_16, decoding.jmp_eip);
   cpu.eflags.IF = 0; 
 }
