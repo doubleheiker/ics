@@ -34,10 +34,8 @@ int _write(int fd, void *buf, size_t count){
 void *_sbrk(intptr_t increment){
   static intptr_t brk = &_end;
   intptr_t old_brk = brk;
-  //int i = _syscall_(SYS_brk, old_brk+increment, 0, 0);
-  //printf("syscall: %d", i);
+  
   if (_syscall_(SYS_brk, old_brk+increment, 0, 0) == 0) {
-	  //Log("in brk");
 	  brk = increment + old_brk;
 	  return (void *)old_brk;
   }
