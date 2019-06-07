@@ -11,6 +11,8 @@
 
 // FIXME: this is temporary
 
+extern char _end;
+
 int _syscall_(int type, uintptr_t a0, uintptr_t a1, uintptr_t a2){
   int ret = -1;
   asm volatile("int $0x80": "=a"(ret): "a"(type), "b"(a0), "c"(a1), "d"(a2));
@@ -30,6 +32,13 @@ int _write(int fd, void *buf, size_t count){
 }
 
 void *_sbrk(intptr_t increment){
+  static intptr_t brk = &_end;
+  intptr_t old_brk = brk;
+
+  if (_syscall_(SYS_brk, (intptr_t)brk, 0, 0) == 0) {
+	  brk = increment + old_brk;
+	  return (void *)oldbrk;
+  }
   return (void *)-1;
 }
 
