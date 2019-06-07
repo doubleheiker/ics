@@ -54,7 +54,7 @@ _RegSet* do_syscall(_RegSet *r) {
 	case SYS_exit: _halt(a[1]);
 				   break;
 	case SYS_write: SYSCALL_ARG1(r) = sys_write((uintptr_t)a[1], (uintptr_t)a[2], (uintptr_t)a[3]);
-					//Log(sys_write);
+					Log("write: %d", r->eax);
 					break;
 	//case SYS_brk: 
     default: panic("Unhandled syscall ID = %d", a[0]);
