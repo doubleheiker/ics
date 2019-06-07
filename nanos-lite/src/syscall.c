@@ -52,7 +52,7 @@ _RegSet* do_syscall(_RegSet *r) {
   switch (a[0]) {
 	case SYS_none: SYSCALL_ARG1(r) = 1;
 				   break;
-	case SYS_exit: _halt(a[1]);
+	case SYS_exit: _halt(0);
 				   break;
 	case SYS_write: SYSCALL_ARG1(r) = sys_write((uintptr_t)a[1], (uintptr_t)a[2], (uintptr_t)a[3]);
 					Log("write");
