@@ -36,6 +36,7 @@ void *_sbrk(intptr_t increment){
   intptr_t old_brk = brk;
 
   if (_syscall_(SYS_brk, (intptr_t)brk, 0, 0) == 0) {
+	  Log("in brk");
 	  brk = increment + old_brk;
 	  return (void *)oldbrk;
   }
