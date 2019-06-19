@@ -33,12 +33,12 @@ void paddr_write(paddr_t addr, int len, uint32_t data) {
 #define cross_page(addr, len) \
 	((((addr) + (len) - 1) & ~PAGE_MASK) != ((addr) & ~PAGE_MASK))
 
-paddr_t page_translate(vaddr_t vaddr, bool is_write) {
+paddr_t page_translate(vaddr_t addr, bool is_write) {
 	if (cpu.cr0.paging == 0) {
-		return vaddr;
+		return addr;
 	}
 
-	Log("vaddr:%x", vaddr);
+	/*Log("vaddr:%x", vaddr);
 	uint32_t base = cpu.cr3.page_directory_base;//page directory base
 	Log("base: %x", base);
 	        uint32_t dir=(((uint32_t)(vaddr)>>22)&0x3ff);
@@ -50,9 +50,9 @@ paddr_t page_translate(vaddr_t vaddr, bool is_write) {
 													        uint32_t PTE=paddr_read((PDE&0xfffff000)+(page_node<<2),4);
 															        assert(PTE&0x1);
 																	        uint32_t address_page=(PTE&0xfffff000)+((uint32_t)(vaddr)&0xfff);
-																			        return address_page;
+																			        return address_page;*/
 	
-	/*Log("vaddr: %x", addr);
+	Log("vaddr: %x", addr);
 	PDE pde, *pd;//page directory entry
 	PTE pte, *pt;//page table entry
 
@@ -62,7 +62,7 @@ paddr_t page_translate(vaddr_t vaddr, bool is_write) {
 	
 	pd = (PDE *)(intptr_t)(cpu.cr3.page_directory_base << 12);
 	Log("base: %x", cpu.cr3.page_directory_base);
-	pde.val = paddr_read((intptr_t)&pd[(addr >> 22) & 0x3ff], 4);
+	pde.val = paddr_read((intptr_t)&pd[((addr >> 22) & 0x3ff) << 2], 4);
 	Log("addr: %x", (intptr_t)&pd[(addr >> 22) & 0x3ff]);
 	//pd = cpu.cr3.page_directory_base << 12;
 	//pde.val = paddr_read((pd + ((addr >> 22) & 0x3ff)), 4);
@@ -73,7 +73,7 @@ paddr_t page_translate(vaddr_t vaddr, bool is_write) {
 	//paddr_write((pd + ((addr >> 22) & 0x3ff)), 4, pde.val);
 
 	pt = (PTE *)(intptr_t)(pde.page_frame << 12);
-	pte.val = paddr_read((intptr_t)&pt[(addr >> 12) & 0x3ff], 4);
+	pte.val = paddr_read((intptr_t)&pt[((addr >> 12) & 0x3ff) << 2], 4);
 	//pt = pde.page_frame << 12;
 	//pte.val = paddr_read((pt + ((addr >> 12) & 0x3ff)), 4);
 	Log("pte: %x\tpresent: %d", pte.val, pte.present);
@@ -84,7 +84,7 @@ paddr_t page_translate(vaddr_t vaddr, bool is_write) {
 	//paddr_write((pt + ((addr >> 12) & 0x3ff)), 4, pte.val);
 
 	paddr = (pte.page_frame << 12) | (addr & PAGE_MASK);
-	return paddr;*/
+	return paddr;
 }
 
 uint32_t vaddr_read(vaddr_t addr, int len) {
