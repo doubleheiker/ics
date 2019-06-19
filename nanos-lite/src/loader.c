@@ -1,4 +1,5 @@
 #include "common.h"
+#include "memory.h"
 
 extern void ramdisk_read(void *buf, off_t offset, size_t len);
 extern size_t get_ramdisk_size();
@@ -13,7 +14,20 @@ uintptr_t loader(_Protect *as, const char *filename) {
   //ramdisk_read(DEFAULT_ENTRY, 0, get_ramdisk_size());
   int fd;//file descriptor
   fd = fs_open(filename, 0, 0);
-  fs_read(fd, DEFAULT_ENTRY, fs_filesz(fd));
+  size_t filesize = fs_filesz(fd);
+  void *pa;
+  void *va;
+
+  Log("loaded: [%d]%s size: %d", fd, filename, filesize);
+
+  void *end = DEFAULT_ENTRY + filesize;
+  for (va = DEFAULT_ENTRY; va < end; va += PGSIZE) {
+	  pa = new_page();
+	  _map(as, va, pa);
+	  fs_read(fd, pa, (end - va) < PGSIZE ? (end - va) : PGSIZE);
+  }
+
+  //fs_read(fd, DEFAULT_ENTRY, fs_filesz(fd));
   fs_close(fd);
   return (uintptr_t)DEFAULT_ENTRY;
 }
