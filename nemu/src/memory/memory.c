@@ -38,19 +38,27 @@ paddr_t page_translate(vaddr_t addr, bool is_write) {
 		return addr;
 	}
 
+	uint32_t paddr;
 	uint32_t pd;//page directory base
 	uint32_t dir=(((uint32_t)(addr)>>22)&0x3ff);//pd index
 	uint32_t pnode=(((uint32_t)(addr)>>12)&0x3ff);//pt index
 	PDE pde;
 	PTE pte;
+
 	pd = cpu.cr3.page_directory_base << 12;
 	pde.val = paddr_read(pd + (dir << 2), 4);
 	assert(pde.present);
+	pde.accessed = 1;
+	paddr_write(pd + (dir << 2), 4, pde.val);
 
 	pte.val = paddr_read((pde.page_frame << 12) + (pnode << 2), 4);
 	assert(pte.present);
-	uint32_t address_page=(pte.page_frame << 12) + ((uint32_t)(addr) & PAGE_MASK);
-	return address_page;
+	pte.accessed = 1;
+	pte.dirty = is_write ? 1 : pte.dirty;
+	paddr_write((pde.page_frame << 12) + (pnode << 2), 4, pte.val);
+
+	paddr = (pte.page_frame << 12) + ((uint32_t)(addr) & PAGE_MASK);
+	return paddr;
 
 	/*Log("vaddr: %x", addr);
 	PDE pde, *pd;//page directory entry
