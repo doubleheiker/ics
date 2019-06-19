@@ -50,6 +50,7 @@ paddr_t page_translate(vaddr_t addr, bool is_write) {
 	pde.val = paddr_read((intptr_t)&pd[(addr >> 22) & 0x3ff], 4);
 	//pd = cpu.cr3.page_directory_base << 12;
 	//pde.val = paddr_read((pd + ((addr >> 22) & 0x3ff)), 4);
+	Log("pde: %x\tpresent: %d", pde.val, pde.present);
 	assert(pde.present);
 	pde.accessed = 1;
 	paddr_write((intptr_t)&pd[(addr >> 22) & 0x3ff], 4, pte.val);
