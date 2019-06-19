@@ -52,6 +52,7 @@ paddr_t page_translate(vaddr_t addr, bool is_write) {
 
 	pt = pde.page_frame << 12;
 	pte.val = paddr_read((pt + ((addr >> 12) & 0x3ff)), 4);
+	Log("present: %d", pte.present);
 	assert(pte.present);
 	pte.accessed = 1;
 	pte.dirty = is_write ? 1 : pte.dirty;
