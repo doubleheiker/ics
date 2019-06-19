@@ -49,6 +49,7 @@ paddr_t page_translate(vaddr_t addr, bool is_write) {
 	pde.val = paddr_read((pd + ((addr >> 22) & 0x3ff)), 4);
 	assert(pde.present);
 	pde.accessed = 1;
+	paddr_write((pd + ((addr >> 22) & 0x3ff)), 4, pde.val);
 
 	pt = pde.page_frame << 12;
 	pte.val = paddr_read((pt + ((addr >> 12) & 0x3ff)), 4);
@@ -56,6 +57,7 @@ paddr_t page_translate(vaddr_t addr, bool is_write) {
 	assert(pte.present);
 	pte.accessed = 1;
 	pte.dirty = is_write ? 1 : pte.dirty;
+	paddr_write((pt + ((addr >> 12) & 0x3ff)), 4, pte.val);
 
 	paddr = (pte.page_frame << 12) | (addr & PAGE_MASK);
 	return paddr;
