@@ -47,7 +47,7 @@ paddr_t page_translate(vaddr_t addr, bool is_write) {
 	pde.val = paddr_read(pd + (dir << 2), 4);
 	assert(pde.present);
 
-	pte.val = paddr_read((pde.page_frame) + (pnode << 2), 4);
+	pte.val = paddr_read((pde.page_frame << 12) + (pnode << 2), 4);
 	assert(pte.present);
 	uint32_t address_page=(pte.page_frame << 12) + ((uint32_t)(addr) & PAGE_MASK);
 	return address_page;
