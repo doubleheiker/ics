@@ -38,6 +38,8 @@ paddr_t page_translate(vaddr_t addr, bool is_write) {
 		return addr;
 	}
 
+	//Log("vaddr: %x", addr);
+
 	uint32_t paddr;
 	uint32_t pd;//page directory base
 	uint32_t dir=(((uint32_t)(addr)>>22)&0x3ff);//pd index
@@ -50,12 +52,14 @@ paddr_t page_translate(vaddr_t addr, bool is_write) {
 	assert(pde.present);
 	pde.accessed = 1;
 	paddr_write(pd + (dir << 2), 4, pde.val);
+	//Log("pde: %x\tpresent: %d", pde.val, pde.present);
 
 	pte.val = paddr_read((pde.page_frame << 12) + (pnode << 2), 4);
 	assert(pte.present);
 	pte.accessed = 1;
 	pte.dirty = is_write ? 1 : pte.dirty;
 	paddr_write((pde.page_frame << 12) + (pnode << 2), 4, pte.val);
+	Log("pte: %x\tpresent: %d", pte.val, pte.present);
 
 	paddr = (pte.page_frame << 12) + ((uint32_t)(addr) & PAGE_MASK);
 	return paddr;
