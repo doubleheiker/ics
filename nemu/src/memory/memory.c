@@ -39,27 +39,32 @@ paddr_t page_translate(vaddr_t addr, bool is_write) {
 	}
 	
 	Log("vaddr: %x", addr);
-	PDE pde;//page directory entry
-	PTE pte;//page table entry
+	PDE pde, *pd;//page directory entry
+	PTE pte, *pt;//page table entry
 
-	uint32_t pd;//page directory base
-	uint32_t pt;//page table base
+	//uint32_t pd;//page directory base
+	//uint32_t pt;//page table base
 	paddr_t paddr;
-
-	pd = cpu.cr3.page_directory_base << 12;
-	pde.val = paddr_read((pd + ((addr >> 22) & 0x3ff)), 4);
-	//pde.val = paddr_read((intptr_t)&p)
+	
+	pd = (PDE *)(intptr_t)(cpu.cr3.page_directory_base << 12);
+	pde.val = paddr_read((intptr_t)&pd[(addr >> 22) & 0x3ff], 4);
+	//pd = cpu.cr3.page_directory_base << 12;
+	//pde.val = paddr_read((pd + ((addr >> 22) & 0x3ff)), 4);
 	assert(pde.present);
 	pde.accessed = 1;
-	paddr_write((pd + ((addr >> 22) & 0x3ff)), 4, pde.val);
+	paddr_write((intptr_t)&pd[(addr >> 22) & 0x3ff], 4, pte.val);
+	//paddr_write((pd + ((addr >> 22) & 0x3ff)), 4, pde.val);
 
-	pt = pde.page_frame << 12;
-	pte.val = paddr_read((pt + ((addr >> 12) & 0x3ff)), 4);
+	pt = (PTE *)(intptr_t)(pde.page_frame << 12);
+	pte.val = paddr_read((intptr_t)&pt[(addr >> 12) & 0x3ff], 4);
+	//pt = pde.page_frame << 12;
+	//pte.val = paddr_read((pt + ((addr >> 12) & 0x3ff)), 4);
 	Log("pte: %x\tpresent: %d", pte.val, pte.present);
 	assert(pte.present);
 	pte.accessed = 1;
 	pte.dirty = is_write ? 1 : pte.dirty;
-	paddr_write((pt + ((addr >> 12) & 0x3ff)), 4, pte.val);
+	paddr_write((intptr_t)&pt[(addr >> 12) & 0x3ff], 4, pte.val);
+	//paddr_write((pt + ((addr >> 12) & 0x3ff)), 4, pte.val);
 
 	paddr = (pte.page_frame << 12) | (addr & PAGE_MASK);
 	return paddr;
