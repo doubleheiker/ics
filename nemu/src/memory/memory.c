@@ -37,7 +37,8 @@ paddr_t page_translate(vaddr_t addr, bool is_write) {
 	if (cpu.cr0.paging == 0) {
 		return addr;
 	}
-
+	
+	Log("vaddr: %x", addr);
 	PDE pde;//page directory entry
 	PTE pte;//page table entry
 
@@ -53,7 +54,7 @@ paddr_t page_translate(vaddr_t addr, bool is_write) {
 
 	pt = pde.page_frame << 12;
 	pte.val = paddr_read((pt + ((addr >> 12) & 0x3ff)), 4);
-	Log("pte: %x\tpresent: %d", pte.val, pte.present);
+	//Log("pte: %x\tpresent: %d", pte.val, pte.present);
 	assert(pte.present);
 	pte.accessed = 1;
 	pte.dirty = is_write ? 1 : pte.dirty;
