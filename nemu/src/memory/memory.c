@@ -48,6 +48,7 @@ paddr_t page_translate(vaddr_t addr, bool is_write) {
 
 	pd = cpu.cr3.page_directory_base << 12;
 	pde.val = paddr_read((pd + ((addr >> 22) & 0x3ff)), 4);
+	//pde.val = paddr_read((intptr_t)&p)
 	assert(pde.present);
 	pde.accessed = 1;
 	paddr_write((pd + ((addr >> 22) & 0x3ff)), 4, pde.val);
