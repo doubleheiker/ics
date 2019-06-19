@@ -59,7 +59,7 @@ paddr_t page_translate(vaddr_t addr, bool is_write) {
 	pte.accessed = 1;
 	pte.dirty = is_write ? 1 : pte.dirty;
 	paddr_write((pde.page_frame << 12) + (pnode << 2), 4, pte.val);
-	Log("pte: %x\tpresent: %d", pte.val, pte.present);
+	//Log("pte: %x\tpresent: %d", pte.val, pte.present);
 
 	paddr = (pte.page_frame << 12) + ((uint32_t)(addr) & PAGE_MASK);
 	return paddr;
