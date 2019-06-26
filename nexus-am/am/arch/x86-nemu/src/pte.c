@@ -81,7 +81,7 @@ void _unmap(_Protect *p, void *va) {
 }
 
 _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *const argv[], char *const envp[]) {
-  struct {_RegSet *tf;} *pcb = ustack.start;
+  /*struct {_RegSet *tf;} *pcb = ustack.start;
   uint32_t *stack = (uint32_t *)(ustack.end);
 
   //stack frame
@@ -93,5 +93,15 @@ _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *cons
   pcb->tf->cs = 8;
   pcb->tf->eflags = 0x2 | (1 << 9);
   pcb->tf->eip = (uintptr_t)entry;
-  return pcb->tf;
+  return pcb->tf;*/
+  ustack.end -= 4 * sizeof(int);
+  int *p0 = ustack.end;
+  p0[0] = p0[1] = p0[2] = p0[3] = 0;
+
+  _RegSet *r = (_RegSet*)ustack.end - 1;
+
+  r->cs = 0x8;
+  r->eip = (uintptr_t)entry;
+  r->eflags = 0x2 | (1 << 9);
+  return r;
 }
