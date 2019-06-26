@@ -10,7 +10,7 @@ static _RegSet* do_event(_Event e, _RegSet* r) {
 						 break;
 	case _EVENT_TRAP: ret = schedule(r);
 					  break;
-	case _EVENT_IRQ_TIME: Log("IRQ_TIME!");
+	case _EVENT_IRQ_TIME: //Log("IRQ_TIME!");
 						  ret = schedule(r);
 						  break;
     default: panic("Unhandled event ID = %d", e.event);
