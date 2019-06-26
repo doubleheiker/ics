@@ -86,7 +86,7 @@ _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *cons
 
   //stack frame
   for (int i = 0; i < 3; i++) {
-	  *stack-- = 0;
+	  *stack++ = 0;
   }
 
   pcb->tf = (void *)(stack - sizeof(_RegSet));
