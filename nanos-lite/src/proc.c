@@ -39,6 +39,7 @@ _RegSet* schedule(_RegSet *prev) {
   else {
 	  current = &pcb[1];
   }
+  count++;
 
   _switch(&current->as);
   return current->tf;
