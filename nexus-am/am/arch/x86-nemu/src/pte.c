@@ -82,11 +82,11 @@ void _unmap(_Protect *p, void *va) {
 
 _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *const argv[], char *const envp[]) {
   struct {_RegSet *tf;} *pcb = ustack.start;
-  uint32_t *stack = (uint32_t *)(ustack.end - 4);
+  uint32_t *stack = (uint32_t *)(ustack.end);
 
   //stack frame
   for (int i = 0; i < 3; i++) {
-	  *stack++ = 0;
+	  *stack-- = 0;
   }
 
   pcb->tf = (void *)(stack - sizeof(_RegSet));
