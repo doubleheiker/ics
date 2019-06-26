@@ -4,6 +4,7 @@
 
 static PCB pcb[MAX_NR_PROC];
 static int nr_proc = 0;
+static int count = 0;
 PCB *current = NULL;
 
 uintptr_t loader(_Protect *as, const char *filename);
@@ -31,7 +32,13 @@ _RegSet* schedule(_RegSet *prev) {
   current->tf = prev;
 
   //always select pcb[0] as the new process
-  current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
+  //current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
+  if (count % 200) {
+	  current = &pcb[0];
+  }
+  else {
+	  current = &pcb[1];
+  }
 
   _switch(&current->as);
   return current->tf;
